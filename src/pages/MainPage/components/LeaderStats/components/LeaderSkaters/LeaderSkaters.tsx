@@ -1,14 +1,26 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Card, Flex, Segmented, List } from "antd"
 import styles from './LeaderSkaters.module.css'
-import { Skater } from "../../../../../../types/skaterStatsLeaderCurrentGet"
+import { SkaterStatsLeadersCurrentGet } from "../../../../../../types/skaterStatsLeadersCurrentGet"
 import { LeaderSkater } from "./LeaderSkater/LeaderSkater"
+import { skaterStatsLeadersCurrentGet } from "../../../../../../api/skaterStatsLeadersCurrentGet"
 
 export const LeaderSkaters: FC = () => {
     const [currentTab, setCurrentTab] = useState('points')
-    const skaters: Skater[] = []
-    const [skater, setSkater] = useState(skaters[0])
+    const [skaters, setSkaters] =  useState<SkaterStatsLeadersCurrentGet>()
+    useEffect(() => {
+        try {
+            skaterStatsLeadersCurrentGet().then(r => setSkaters(r.payload))
+        } catch (e) {
+            console.error(e)
+        }
+    }, [])
 
+    
+    
+    
+    const [skater, setSkater] = useState(skaters?.assists[0])
+    
     return (
         <>
             <Card title={<a href='/' className={styles.title}>Skaters</a>}>
@@ -24,14 +36,12 @@ export const LeaderSkaters: FC = () => {
                     />
                 </Flex>
                 <Flex>
-                    <Flex vertical>
-                        <img src="https://assets.nhle.com/mugs/nhl/20242025/COL/8477492.png" />
-                        <div>fjfjjf</div>
+                    <Flex vertical  className={styles.width}>
                         <LeaderSkater skater={skater}/>
                     </Flex>
-                    <Flex>
+                    <Flex  className={styles.width}>
                         <List>
-                            {skaters.map(skater => (
+                            {skaters?.assists.map(skater => (
                                 <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)}>
                                     {skater.firstName.default}
                                 </List.Item>
