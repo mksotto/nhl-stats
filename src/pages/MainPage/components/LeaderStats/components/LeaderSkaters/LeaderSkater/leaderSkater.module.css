@@ -9,6 +9,7 @@
 }
 
 .skaterNames {
+    padding-top: 8px;
     padding-bottom: 8px;
 }
 
@@ -20,6 +21,10 @@
     font-size: 24px;
     font-weight: 700;
     line-height: 24px;
+}
+
+.skaterInfo {
+    color: gray;
 }
 
 .points {

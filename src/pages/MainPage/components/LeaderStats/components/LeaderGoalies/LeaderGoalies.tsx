@@ -10,7 +10,7 @@ export const LeaderGoalies: FC = () => {
     const [goalies, setGoalies] =  useState<GoalieStatsLeadersCurrentGet>()
     useEffect(() => {
         try {
-            goalieStatsLeadersCurrentGet().then(r => setGoalies(r.payload))
+            goalieStatsLeadersCurrentGet().then(r => setGoalies(r))
         } catch (e) {
             console.error(e)
         }

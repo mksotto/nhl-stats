@@ -10,16 +10,15 @@ export const LeaderSkaters: FC = () => {
     const [skaters, setSkaters] =  useState<SkaterStatsLeadersCurrentGet>()
     useEffect(() => {
         try {
-            skaterStatsLeadersCurrentGet().then(r => setSkaters(r.payload))
+            skaterStatsLeadersCurrentGet().then(r => setSkaters(r))
         } catch (e) {
             console.error(e)
         }
     }, [])
-
     
     
     
-    const [skater, setSkater] = useState(skaters?.assists[0])
+    const [skater, setSkater] = useState(skaters?.points[0])
     
     return (
         <>
@@ -36,14 +35,19 @@ export const LeaderSkaters: FC = () => {
                     />
                 </Flex>
                 <Flex>
-                    <Flex vertical  className={styles.width}>
+                    <Flex vertical justify="center" className={styles.width}>
                         <LeaderSkater skater={skater}/>
                     </Flex>
                     <Flex  className={styles.width}>
-                        <List>
-                            {skaters?.assists.map(skater => (
+                        <List className={styles.skatersTable}>
+                            {skaters?.points.map(skater => (
                                 <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)}>
-                                    {skater.firstName.default}
+                                    <Flex justify='space-between' className={styles.skatersTable}>
+                                        <div>
+                                            {skater.firstName.default} {skater.lastName.default}
+                                        </div>
+                                        {skater.value}
+                                    </Flex>
                                 </List.Item>
                             ))}
                         </List>

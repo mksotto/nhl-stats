@@ -28,8 +28,8 @@ export const LeaderSkater: FC<Props> = ({skater}) => {
                     <div>{!skater ? 'D' : skater.position}</div>
                 </Flex>
                 <Flex className={styles.points} vertical align="center">
-                    <div className={styles.pointsName} >POINTS</div>
-                    <div className={styles.pointsValue} >{!skater ? '68' : skater.value}</div>
+                    <div className={styles.pointsName}>POINTS</div>
+                    <div className={styles.pointsValue}>{!skater ? '68' : skater.value}</div>
                 </Flex>
             </Flex>
         </>

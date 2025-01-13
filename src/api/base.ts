@@ -8,7 +8,7 @@ type BaseRequestParams = {
 
 const isEmpty = (value?: Record<any, any>) => !value || Object.keys(value).length === 0;
 
-export const makeRequest = <T>({url, method, params}: BaseRequestParams): Promise<{payload: T}> => {
+export const makeRequest = <T>({url, method, params}: BaseRequestParams): Promise<T> => {
 
     return fetch(`${NHL_API_URL}${url}${!isEmpty(params) ? `?${new URLSearchParams(params as any)}` : ''}`, {
         method
