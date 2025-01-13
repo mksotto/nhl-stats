@@ -28,7 +28,7 @@ export const LeaderGoalie: FC<Props> = ({goalie}) => {
             </Flex>
             <Flex className={styles.points} vertical align="center">
                 <div className={styles.pointsName} >POINTS</div>
-                <div className={styles.pointsValue} >{!goalie ? '68' : goalie.value}</div>
+                <div className={styles.pointsValue} >{!goalie ? '68' : Math.round(goalie.value * 100) / 100}</div>
             </Flex>
         </Flex>
     )

@@ -2,13 +2,26 @@ import { FC } from "react";
 import { Flex, Image } from "antd";
 import styles from './leaderSkater.module.css'
 import { LeaderPlayer } from "../../../../../../../types/base";
+import { SkaterStatsLeadersCurrentGet } from "../../../../../../../types/skaterStatsLeadersCurrentGet";
 
 type Props = {
-    skater: LeaderPlayer | undefined
+    skater: LeaderPlayer | undefined;
+    currentTab: keyof SkaterStatsLeadersCurrentGet
 }
 
-export const LeaderSkater: FC<Props> = ({skater}) => {
+const MAP = {
+    points: 'POINTS',
+    goals: 'GOALS',
+    assists: 'ASSISTS',
+    goalsSh: '',
+    plusMinus: '',
+    goalsPp: '',
+    faceoffLeaders: '',
+    penaltyMins: '',
+    toi: '',
+}
 
+export const LeaderSkater: FC<Props> = ({skater, currentTab}) => {
 
     return (
         <>
@@ -28,7 +41,7 @@ export const LeaderSkater: FC<Props> = ({skater}) => {
                     <div>{!skater ? 'D' : skater.position}</div>
                 </Flex>
                 <Flex className={styles.points} vertical align="center">
-                    <div className={styles.pointsName}>POINTS</div>
+                    <div className={styles.pointsName}>{MAP[currentTab]}</div>
                     <div className={styles.pointsValue}>{!skater ? '68' : skater.value}</div>
                 </Flex>
             </Flex>

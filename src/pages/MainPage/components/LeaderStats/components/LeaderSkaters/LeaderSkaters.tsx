@@ -5,8 +5,10 @@ import { SkaterStatsLeadersCurrentGet } from "../../../../../../types/skaterStat
 import { LeaderSkater } from "./LeaderSkater/LeaderSkater"
 import { skaterStatsLeadersCurrentGet } from "../../../../../../api/skaterStatsLeadersCurrentGet"
 
+type CurrentTab = keyof SkaterStatsLeadersCurrentGet
+
 export const LeaderSkaters: FC = () => {
-    const [currentTab, setCurrentTab] = useState('points')
+    const [currentTab, setCurrentTab] = useState<CurrentTab>('points')
     const [skaters, setSkaters] =  useState<SkaterStatsLeadersCurrentGet>()
     useEffect(() => {
         try {
@@ -18,7 +20,7 @@ export const LeaderSkaters: FC = () => {
     
     
     
-    const [skater, setSkater] = useState(skaters?.points[0])
+    const [skater, setSkater] = useState(skaters?.[currentTab][0])
     
     return (
         <>
@@ -36,11 +38,11 @@ export const LeaderSkaters: FC = () => {
                 </Flex>
                 <Flex>
                     <Flex vertical justify="center" className={styles.width}>
-                        <LeaderSkater skater={skater}/>
+                        <LeaderSkater skater={skater} currentTab={currentTab}/>
                     </Flex>
                     <Flex  className={styles.width}>
                         <List className={styles.skatersTable}>
-                            {skaters?.points.map(skater => (
+                            {skaters?.[currentTab].map(skater => (
                                 <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)}>
                                     <Flex justify='space-between' className={styles.skatersTable}>
                                         <div>

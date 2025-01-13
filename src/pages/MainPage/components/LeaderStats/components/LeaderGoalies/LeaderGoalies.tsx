@@ -5,8 +5,10 @@ import { goalieStatsLeadersCurrentGet } from "../../../../../../api/goalieStatsL
 import styles from './LeaderGolaies.module.css'
 import { LeaderGoalie } from "./LeaderGoalie/LeaderGoalie"
 
+type CurrentTab = keyof GoalieStatsLeadersCurrentGet
+
 export const LeaderGoalies: FC = () => {
-    const [currentTab, setCurrentTab] = useState('goalsAgainstAverage')
+    const [currentTab, setCurrentTab] = useState<CurrentTab>('goalsAgainstAverage')
     const [goalies, setGoalies] =  useState<GoalieStatsLeadersCurrentGet>()
     useEffect(() => {
         try {
@@ -19,7 +21,7 @@ export const LeaderGoalies: FC = () => {
     
     
     
-    const [goalie, setGoalie] = useState(goalies?.shutouts[0])
+    const [goalie, setGoalie] = useState(goalies?.[currentTab][0])
     
     return (
         <>
@@ -36,12 +38,12 @@ export const LeaderGoalies: FC = () => {
                     />
                 </Flex>
                 <Flex>
-                    <Flex vertical  className={styles.width}>
+                    <Flex vertical justify="center" className={styles.width}>
                         <LeaderGoalie goalie={goalie}/>
                     </Flex>
                     <Flex  className={styles.width}>
                         <List>
-                            {goalies?.shutouts.map(goalie => (
+                            {goalies?.[currentTab].map(goalie => (
                                 <List.Item key={goalie.id} onMouseEnter={() => setGoalie(goalie)}>
                                     {goalie.firstName.default}
                                 </List.Item>
