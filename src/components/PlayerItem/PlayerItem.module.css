@@ -1,0 +1,33 @@
+.skatersTable {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #E0E0E0;
+    height: 28px;
+}
+
+.skatersTable :hover {
+    width: 100%;
+    border-radius: 8px;
+    height: 28px;
+    
+    background-color: #0055E9;;
+}
+
+.padding {
+    width: 100%;
+    padding: 7px 12px;
+}
+
+.index {
+    text-align: left;
+    width: 24px;
+}
+
+.name {
+    text-align: left;
+    width: 100%;
+}
+
+.value {
+    text-align: right;
+}

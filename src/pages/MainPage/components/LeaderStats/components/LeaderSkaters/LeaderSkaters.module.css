@@ -15,3 +15,7 @@
 .skatersTable {
     width: 100%;
 }
+
+.listItem {
+    padding: 4px 0 !important;
+}

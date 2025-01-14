@@ -4,6 +4,7 @@ import styles from './LeaderSkaters.module.css'
 import { SkaterStatsLeadersCurrentGet } from "../../../../../../types/skaterStatsLeadersCurrentGet"
 import { LeaderSkater } from "./LeaderSkater/LeaderSkater"
 import { skaterStatsLeadersCurrentGet } from "../../../../../../api/skaterStatsLeadersCurrentGet"
+import { PlayerItem } from "../../../../../../components/PlayerItem/PlayerItem"
 
 type CurrentTab = keyof SkaterStatsLeadersCurrentGet
 
@@ -42,14 +43,9 @@ export const LeaderSkaters: FC = () => {
                     </Flex>
                     <Flex  className={styles.width}>
                         <List className={styles.skatersTable}>
-                            {skaters?.[currentTab].map(skater => (
-                                <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)}>
-                                    <Flex justify='space-between' className={styles.skatersTable}>
-                                        <div>
-                                            {skater.firstName.default} {skater.lastName.default}
-                                        </div>
-                                        {skater.value}
-                                    </Flex>
+                            {skaters?.[currentTab].map((skater, key) => (
+                                <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)} className={styles.listItem}>
+                                    <PlayerItem player={skater} keyOfItem={key+1}></PlayerItem>
                                 </List.Item>
                             ))}
                         </List>

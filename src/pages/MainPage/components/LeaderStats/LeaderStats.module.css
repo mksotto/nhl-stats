@@ -1,5 +1,12 @@
+.layout {
+    max-width: 1440px;
+    width: 100%;
+    border-radius: 30px;
+}
+
 .container {
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
+    gap: 24px 32px;
 }
