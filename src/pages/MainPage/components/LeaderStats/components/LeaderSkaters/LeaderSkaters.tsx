@@ -37,11 +37,11 @@ export const LeaderSkaters: FC = () => {
                         onChange={setCurrentTab}
                     />
                 </Flex>
-                <Flex>
-                    <Flex vertical justify="center" className={styles.width}>
+                <Flex className={styles.container}>
+                    <Flex className={styles.playerInfo}>
                         <LeaderSkater skater={skater} currentTab={currentTab}/>
                     </Flex>
-                    <Flex  className={styles.width}>
+                    <Flex  className={styles.playersList}>
                         <List className={styles.skatersTable}>
                             {skaters?.[currentTab].map((skater, key) => (
                                 <List.Item key={skater.id} onMouseEnter={() => setSkater(skater)} className={styles.listItem}>

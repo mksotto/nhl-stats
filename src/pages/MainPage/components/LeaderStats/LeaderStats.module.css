@@ -4,9 +4,21 @@
     border-radius: 30px;
 }
 
-.container {
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 24px 32px;
+@media (min-width: 1248px) {
+    .container {
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 24px 32px;
+    }
 }
+
+@media (max-width: 1247px) {
+    .container {
+        display:grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(4, auto);
+        gap: 24px;
+    }
+}
+
