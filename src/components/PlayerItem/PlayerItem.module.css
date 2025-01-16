@@ -5,12 +5,10 @@
     height: 28px;
 }
 
-.skatersTable :hover {
-    width: 100%;
-    border-radius: 8px;
-    height: 28px;
-    
-    background-color: #0055E9;;
+.skatersTableActive {
+    background-color: #0055E9;
+    border: 1px solid #0055E9;
+    color: white;
 }
 
 .padding {

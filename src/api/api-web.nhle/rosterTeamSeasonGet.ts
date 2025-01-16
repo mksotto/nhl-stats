@@ -1,4 +1,4 @@
-import { RosterTeamSeasonGet } from "../types/rosterTeamSeason";
+import { RosterTeamSeasonGet } from "../../types/rosterTeamSeason";
 import { makeRequest } from "./base";
 
 export const rosterTeamSeasonGet = (team: string, season: string) => makeRequest<RosterTeamSeasonGet>({

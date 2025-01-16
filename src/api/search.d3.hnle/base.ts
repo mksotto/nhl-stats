@@ -1,4 +1,4 @@
-import { NHL_API_URL } from "../constants/constants";
+import { SEARCH_API_URL } from "../../constants/constants";
 
 type BaseRequestParams = {
     url: string;
@@ -10,7 +10,7 @@ const isEmpty = (value?: Record<any, any>) => !value || Object.keys(value).lengt
 
 export const makeRequest = <T>({url, method, params}: BaseRequestParams): Promise<T> => {
 
-    return fetch(`${NHL_API_URL}${url}${!isEmpty(params) ? `?${new URLSearchParams(params as any)}` : ''}`, {
+    return fetch(`${SEARCH_API_URL}${url}${!isEmpty(params) ? `?${new URLSearchParams(params as any)}` : ''}`, {
         method
     }).then((r) => r.json())
 };

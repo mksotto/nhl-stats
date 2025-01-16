@@ -3,11 +3,16 @@ import { LeaderPlayer } from "../../../../../../../types/base";
 import { Flex, Image } from "antd";
 import styles from './LeaderGoalie.module.css'
 
+const formatNumber = (num: number) => num.toFixed(3).replace(/^0\./, '.');
+
+// сделать проп один из трех валуе, пихать проп в формат намбер, и в зависимости от него делать че надо
+
 type Props = {
-    goalie: LeaderPlayer | undefined
+    goalie: LeaderPlayer | undefined;
+    removeZero: boolean;
 }
 
-export const LeaderGoalie: FC<Props> = ({goalie}) => {
+export const LeaderGoalie: FC<Props> = ({goalie, removeZero}) => {
 
 
     return (
@@ -28,7 +33,7 @@ export const LeaderGoalie: FC<Props> = ({goalie}) => {
             </Flex>
             <Flex className={styles.points} vertical align="center">
                 <div className={styles.pointsName} >POINTS</div>
-                <div className={styles.pointsValue} >{!goalie ? '68' : Math.round(goalie.value * 100) / 100}</div>
+                <div className={styles.pointsValue} >{!goalie ? '68' : (removeZero ? formatNumber(goalie.value) : goalie.value )}</div>
             </Flex>
         </Flex>
     )
