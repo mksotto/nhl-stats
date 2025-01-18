@@ -135,6 +135,7 @@ export interface PlayerPlayerIdLandingGet {
     weightInKilograms?:            number;
     birthDate?:                    Date;
     birthCity?:                    Name;
+    birthStateProvince?:           Name;
     birthCountry?:                 string;
     shootsCatches?:                string;
     draftDetails?:                 DraftDetails;

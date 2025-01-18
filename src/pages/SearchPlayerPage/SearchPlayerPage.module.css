@@ -1,0 +1,16 @@
+.inputPlayer {
+    max-width: 300px;
+    width: 100%;
+}
+
+.layout {
+    max-width: 1440px;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.playersCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}

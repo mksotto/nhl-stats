@@ -1,0 +1,24 @@
+.playerCard {
+    padding:  8px 24px;
+    width: 100%;
+}
+
+.headshot {
+    border-radius: 0 0 50% 50%;
+    height: 180px;
+}
+
+.name {
+    line-height: 48px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.description {
+    font-size: 24px;
+    color: gray;
+}
+
+.teamLogo {
+    height: 40px;
+}
