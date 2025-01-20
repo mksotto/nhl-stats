@@ -3,6 +3,7 @@ import { Flex, Image } from "antd";
 import styles from './leaderSkater.module.css'
 import { LeaderPlayer } from "../../../../../../../types/base";
 import { SkaterStatsLeadersCurrentGet } from "../../../../../../../types/skaterStatsLeadersCurrentGet";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     skater: LeaderPlayer | undefined;
@@ -23,18 +24,24 @@ const MAP = {
 
 export const LeaderSkater: FC<Props> = ({skater, currentTab}) => {
 
+    const navigate = useNavigate()
+
     return (
         <>
             <Flex gap={8} align="center" className={styles.container}>
                 <Flex gap={8} className={styles.skatersInfo}>
                     <Image className={styles.image} src={skater?.headshot} />
-                    <Flex vertical className={styles.skaterDescription}>
+                    <Flex 
+                        vertical 
+                        className={styles.skaterDescription}
+                        onClick={() => {navigate(`/player/${skater?.id}`)}}   
+                    >
                         <Flex className={styles.skaterNames}>
                             <div className={styles.skaterName}>{skater?.firstName.default}</div>
                             <div className={styles.skaterName}>{skater?.lastName.default}</div>
                         </Flex>
                         <Flex gap={2} className={styles.skaterInfo}>
-                            <Image className={styles.teamLogo} src={skater?.teamLogo} />
+                            <img className={styles.teamLogo} src={skater?.teamLogo} />
                             <div>{skater?.teamAbbrev}</div>
                             <div>•</div>
                             <div>{`#${skater?.sweaterNumber}`}</div>

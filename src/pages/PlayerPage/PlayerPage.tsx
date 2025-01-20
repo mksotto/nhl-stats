@@ -3,9 +3,10 @@ import { FC, useEffect, useState } from "react";
 import { playerPlayerIdLandingGet } from "../../api/api-web.nhle/playerPlayerIdLandingGet";
 import { PlayerPlayerIdLandingGet } from "../../types/playerPlayerIdLandingGet";
 import styles from './PlayerPage.module.css'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const PlayerPage: FC = () => {
+    const navigate = useNavigate()
     const { playerId } = useParams()
     const [player, setPlayer] = useState<PlayerPlayerIdLandingGet>()
     useEffect(() => {
@@ -14,7 +15,11 @@ export const PlayerPage: FC = () => {
         } catch (e) {
             console.error(e)
         }
-    }, [])
+    }, [playerId])
+    const options = player?.currentTeamRoster?.map((otherPlayer) => ({
+        label: `${otherPlayer?.firstName.default} ${otherPlayer?.lastName.default}`, 
+        value: otherPlayer?.playerId
+    }))
     
     return (
         <Flex justify="center">
@@ -28,18 +33,21 @@ export const PlayerPage: FC = () => {
                             <div className={styles.titlePlayerInfo}>{`#${player?.sweaterNumber}`}</div>
                             <div className={styles.titlePlayerInfo}>{`${player?.position}`}</div>
                         </Flex>
-                        <Flex className={styles.titleContainer}>
-                            <div>ROSTER</div>
-                            <Select
-                                showSearch
-                                optionFilterProp="label"
-                                // options={options}
-                                // value={option}
-                                // onChange={(value) => setOption(value)}
-                                style={{ flex: '1 0' }}
-                                className={styles.selectRoster}
-                            />
-                        </Flex>
+                        {player?.isActive && (
+                            <Flex className={styles.titleContainer}>
+                                <div>ROSTER</div>
+                                <Select
+                                    showSearch
+                                    optionFilterProp="label"
+                                    options={options}
+                                    defaultValue={playerId}
+                                    // value={playerId}
+                                    onChange={(value) => navigate(`/player/${value}`)}
+                                    style={{ flex: '1 0' }}
+                                    className={styles.selectRoster}
+                                />
+                            </Flex>
+                        )}
                     </Flex>
                 )}
             >
@@ -50,8 +58,8 @@ export const PlayerPage: FC = () => {
                         <div>{`Height: ${player?.heightInCentimeters} cm`}</div>
                         <div>{`Weight: ${player?.weightInKilograms} kg`}</div>
                         <div>{`Birthdate: ${player?.birthDate}`}</div>
-                        <div>{`Birthplace: ${player?.birthCity?.default}, ` + (player?.birthStateProvince && `${player?.birthStateProvince.default}, `) + `${player?.birthCountry}`}</div>
-                        <div>{`Draft: ${player?.draftDetails?.year}, ${player?.draftDetails?.teamAbbrev} (${player?.draftDetails?.overallPick} overall), ${player?.draftDetails?.round} round, ${player?.draftDetails?.pickInRound} pick`}</div>
+                        <div>{`Birthplace: ${player?.birthCity?.default}, ` + (player?.birthStateProvince ? `${player?.birthStateProvince.default}, ` : '') + `${player?.birthCountry}`}</div>
+                        <div>{'Draft: ' + (player?.draftDetails ? `${player?.draftDetails?.year}, ${player?.draftDetails?.teamAbbrev} (${player?.draftDetails?.overallPick} overall), ${player?.draftDetails?.round} round, ${player?.draftDetails?.pickInRound} pick` : 'Undrafted')}</div>
                     </Flex>
                 </Flex>
                 <div>

@@ -21,16 +21,18 @@
 }
 
 .selectRoster {
-    max-width: 260px;
-    width: 100%;
+    width: 200px;
+    /* width: 100%; */
 }
 
 .heroImage {
-    width: 100%;
+    width: calc(100% + 48px);
+    margin: -24px;
 }
 
 .headShot {
     border-radius: 0 0 50% 50%;
+    width: 256px;
     /* margin-top: -190px; */
 }
 
