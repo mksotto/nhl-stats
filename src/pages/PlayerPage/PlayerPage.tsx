@@ -7,11 +7,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export const PlayerPage: FC = () => {
     const navigate = useNavigate()
-    const { playerId } = useParams()
+    const playerId = Number(useParams().playerId)
     const [player, setPlayer] = useState<PlayerPlayerIdLandingGet>()
     useEffect(() => {
         try {
-            playerPlayerIdLandingGet(Number(playerId)).then(r => setPlayer(r))
+            playerPlayerIdLandingGet(playerId).then(r => setPlayer(r))
         } catch (e) {
             console.error(e)
         }
@@ -41,7 +41,6 @@ export const PlayerPage: FC = () => {
                                     optionFilterProp="label"
                                     options={options}
                                     defaultValue={playerId}
-                                    // value={playerId}
                                     onChange={(value) => navigate(`/player/${value}`)}
                                     style={{ flex: '1 0' }}
                                     className={styles.selectRoster}
@@ -51,16 +50,18 @@ export const PlayerPage: FC = () => {
                     </Flex>
                 )}
             >
-                <img src={player?.heroImage} className={styles.heroImage} />
-                <Flex align="center">
-                    <img src={player?.headshot} className={styles.headShot}/>
-                    <Flex vertical className={styles.playerCharacteristics}>
-                        <div>{`Height: ${player?.heightInCentimeters} cm`}</div>
-                        <div>{`Weight: ${player?.weightInKilograms} kg`}</div>
-                        <div>{`Birthdate: ${player?.birthDate}`}</div>
-                        <div>{`Birthplace: ${player?.birthCity?.default}, ` + (player?.birthStateProvince ? `${player?.birthStateProvince.default}, ` : '') + `${player?.birthCountry}`}</div>
-                        <div>{'Draft: ' + (player?.draftDetails ? `${player?.draftDetails?.year}, ${player?.draftDetails?.teamAbbrev} (${player?.draftDetails?.overallPick} overall), ${player?.draftDetails?.round} round, ${player?.draftDetails?.pickInRound} pick` : 'Undrafted')}</div>
-                    </Flex>
+                {/* <img src={player?.heroImage} className={styles.heroImage} /> */}
+                <Flex align="center" style={{backgroundImage: `url(${player?.heroImage})`}} className={styles.heroImage}>
+                    <div className={styles.playerDescription}>
+                        <img src={player?.headshot} className={styles.headShot}/>
+                        <Flex vertical className={styles.playerCharacteristics}>
+                            <div>{`Height: ${player?.heightInCentimeters} cm`}</div>
+                            <div>{`Weight: ${player?.weightInKilograms} kg`}</div>
+                            <div>{`Birthdate: ${player?.birthDate}`}</div>
+                            <div>{`Birthplace: ${player?.birthCity?.default}, ` + (player?.birthStateProvince ? `${player?.birthStateProvince.default}, ` : '') + `${player?.birthCountry}`}</div>
+                            <div>{'Draft: ' + (player?.draftDetails ? `${player?.draftDetails?.year}, ${player?.draftDetails?.teamAbbrev} (${player?.draftDetails?.overallPick} overall), ${player?.draftDetails?.round} round, ${player?.draftDetails?.pickInRound} pick` : 'Undrafted')}</div>
+                        </Flex>
+                    </div>
                 </Flex>
                 <div>
                     <div>

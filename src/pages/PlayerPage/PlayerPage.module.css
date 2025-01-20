@@ -27,12 +27,31 @@
 
 .heroImage {
     width: calc(100% + 48px);
-    margin: -24px;
+    height: 720px;
+    margin: -24px -24px 0px -24px;
+    background-size: cover;
+    background-position: center;
+    align-items: start;
+}
+
+.playerDescription {
+    display: flex;
+    gap: 24px;
+    align-items: end;
+    position: relative;
+    width: 100%;
+    height: 256px;
+    align-items: center;
+    top: 464px;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 24px;
 }
 
 .headShot {
     border-radius: 0 0 50% 50%;
-    width: 256px;
+    width: 228px;
+    padding-bottom: 8px;
     /* margin-top: -190px; */
 }
 
