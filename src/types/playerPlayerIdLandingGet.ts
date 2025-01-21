@@ -133,7 +133,7 @@ export interface PlayerPlayerIdLandingGet {
     heightInCentimeters?:          number;
     weightInPounds?:               number;
     weightInKilograms?:            number;
-    birthDate?:                    Date;
+    birthDate?:                    string;
     birthCity?:                    Name;
     birthStateProvince?:           Name;
     birthCountry?:                 string;
