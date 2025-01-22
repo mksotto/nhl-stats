@@ -1,0 +1,18 @@
+.titleContainer {
+    padding: 16px;
+    align-items: center;
+    gap: 8px;
+}
+
+.titlePlayerInfo {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.titleTeamLogo {
+    height: 48px;
+}
+
+.selectRoster {
+    width: 200px;
+}

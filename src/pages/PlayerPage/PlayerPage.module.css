@@ -5,26 +5,6 @@
     margin-top: 40px;
 }
 
-.titleContainer {
-    padding: 16px;
-    align-items: center;
-    gap: 8px;
-}
-
-.titlePlayerInfo {
-    font-size: 40px;
-    font-weight: 700;
-}
-
-.titleTeamLogo {
-    height: 48px;
-}
-
-.selectRoster {
-    width: 200px;
-    /* width: 100%; */
-}
-
 .heroImage {
     width: calc(100% + 48px);
     height: 720px;
@@ -47,16 +27,8 @@
 }
 
 .headShot {
-    border-radius: 0 0 50% 50%;
+    border-radius: 50% 50% 50% 50%;
     width: 228px;
     padding-bottom: 8px;
     /* margin-top: -190px; */
-}
-
-.playerCharacteristics {
-    font-size: 20px;
-}
-
-.playerCharacteristicKey {
-    font-weight: 700;
 }
