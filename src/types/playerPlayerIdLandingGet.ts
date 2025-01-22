@@ -16,6 +16,7 @@ export interface FeaturedStats {
 
 export interface StatsBySeason {
     subSeason: PlayerStats;
+    playoffs?: PlayerStats;
     career:    PlayerStats;
 }
 
@@ -25,41 +26,54 @@ export interface CareerTotals {
 }
 
 export interface PlayerStats {
-    assists:             number;
-    avgToi?:             string;
-    faceoffWinningPctg?: number;
-    gameWinningGoals:    number;
-    gamesPlayed:         number;
-    goals:               number;
-    otGoals:             number;
-    pim:                 number;
-    plusMinus:           number;
-    points:              number;
-    powerPlayGoals:      number;
-    powerPlayPoints:     number;
-    shootingPctg:        number;
-    shorthandedGoals:    number;
-    shorthandedPoints:   number;
-    shots:               number;
+    assists?:             number;
+    avgToi?:              string;
+    faceoffWinningPctg?:  number;
+    gameWinningGoals?:    number;
+    gamesPlayed:          number;
+    goals?:               number;
+    otGoals?:             number;
+    pim?:                 number;
+    plusMinus?:           number;
+    points?:              number;
+    powerPlayGoals?:      number;
+    powerPlayPoints?:     number;
+    shootingPctg?:        number;
+    shorthandedGoals?:    number;
+    shorthandedPoints?:   number;
+    shots?:               number;
+    goalsAgainstAvg?:     number;
+    losses?:              number;
+    otLosses?:            number;
+    savePctg?:            number;
+    shutouts?:            number;
+    ties?:                number;
+    wins?:                number;
 }
 
 export interface Last5Game {
-    assists:          number;
+    assists?:          number;
     gameDate:         Date;
     gameId:           number;
     gameTypeId:       number;
-    goals:            number;
+    goals?:            number;
     homeRoadFlag:     string;
     opponentAbbrev:   string;
-    pim:              number;
-    plusMinus:        number;
-    points:           number;
-    powerPlayGoals:   number;
-    shifts:           number;
-    shorthandedGoals: number;
-    shots:            number;
+    pim?:              number;
+    plusMinus?:        number;
+    points?:           number;
+    powerPlayGoals?:   number;
+    shifts?:           number;
+    shorthandedGoals?: number;
+    shots?:            number;
     teamAbbrev:       string;
     toi:              string;
+    decision?:        string;
+    gamesStarted?:    number;
+    goalsAgainst?:    number;
+    penaltyMins?:     number;
+    savePctg?:        number;
+    shotsAgainst?:    number;
 }
 
 export interface SeasonTotal {

@@ -8,6 +8,18 @@ import dayjs from "dayjs";
 
 // создать константу в которой будут храниться нужные параметры с бека, записать необходимое отображение ex: 'plusMinus': '+/-', и пройтись сначала фильтром потом мапилкой при создании реакт компонента
 
+const FEATURED_STATS: Record<string, string> = {
+    'gamesPlayed': 'GP',
+    'goals': 'G',
+    'assists': 'A',
+    'points': 'P',
+    'plusMinus': '+/-',
+    'wins': 'W',
+    'shutouts': 'SO',
+    'goalsAgainstAvg': 'GAA',
+    'savePctg': 'SV%',
+};
+
 export const PlayerPage: FC = () => {
     const navigate = useNavigate();
     const playerId = Number(useParams().playerId);
@@ -23,7 +35,13 @@ export const PlayerPage: FC = () => {
         label: `${otherPlayer?.firstName.default} ${otherPlayer?.lastName.default}`, 
         value: otherPlayer?.playerId
     }));
+
     const seasonString = String(player?.featuredStats?.season);
+
+    const featuredStatsRegularSeason = Object.entries(player?.featuredStats?.regularSeason.subSeason || {}).filter((item) => FEATURED_STATS[item[0]])
+    const featuredStatsPlayoffSeason = Object.entries(player?.featuredStats?.playoffs?.subSeason || {}).filter((item) => FEATURED_STATS[item[0]])
+    const featuredStatsRegularCareer = Object.entries(player?.featuredStats?.regularSeason.career || {}).filter((item) => FEATURED_STATS[item[0]])
+    const featuredStatsPlayoffCareer = Object.entries(player?.featuredStats?.playoffs?.career || {}).filter((item) => FEATURED_STATS[item[0]])
 
     return (
         <Flex justify="center">
@@ -85,19 +103,15 @@ export const PlayerPage: FC = () => {
                 <div>
                     <div>
                         <div>{`${seasonString.substring(0, 4)}-${seasonString.substring(6)}`} Season</div>
-                        <div>{`${player?.featuredStats?.regularSeason.subSeason.gamesPlayed}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.subSeason.goals}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.subSeason.assists}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.subSeason.points}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.subSeason.plusMinus}`}</div>
+                        {featuredStatsRegularSeason.map((parameter) => (
+                            <div>{FEATURED_STATS[parameter[0]]} {parameter[1]}</div>
+                        ))}
                     </div>
                     <div>
                         <div>{'Career'}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.career.gamesPlayed}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.career.goals}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.career.assists}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.career.points}`}</div>
-                        <div>{`${player?.featuredStats?.regularSeason.career.plusMinus}`}</div>
+                        {featuredStatsRegularCareer.map((parameter) => (
+                            <div>{FEATURED_STATS[parameter[0]]} {parameter[1]}</div>
+                        ))}
                     </div>
                 </div>
             </Card>
