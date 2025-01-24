@@ -23,8 +23,7 @@ export const PlayerCharacteristics: FC<Props> = ({player}) => {
             </Flex>
             <Flex gap={8}>
                 <div className={styles.playerCharacteristicKey}>Birthdate:</div>
-                <div>{`${(player?.birthDate ? dayjs(player?.birthDate).format('DD MMMM YYYY') : '')}`}</div>
-                <div>{`(Age: ${(player?.birthDate ? new Date(Date.now() - Date.parse(player?.birthDate)).getFullYear() - 1970 : '')})`}</div>
+                <div>{`${(player?.birthDate ? dayjs(player?.birthDate).format('DD MMMM YYYY') : '')}`} (Age:&nbsp;{`${(player?.birthDate ? new Date(Date.now() - Date.parse(player?.birthDate)).getFullYear() - 1970 : '')}`})</div>
             </Flex>
             <Flex gap={8}>
                 <div className={styles.playerCharacteristicKey}>Birthplace:</div>

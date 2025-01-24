@@ -32,7 +32,7 @@ export const LeaderSkaters: FC = () => {
 
     const handleTabChange = (value: CurrentTab) => {
         setCurrentTab(value);
-        setSkater(skaters?.[value][skaterId])
+        setSkater(skaters?.[value][skaterId]);
     }
     
     

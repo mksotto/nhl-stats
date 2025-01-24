@@ -1,16 +1,14 @@
-import { Card, Flex, Select } from "antd";
+import { Card, Flex } from "antd";
 import { FC, useEffect, useState } from "react";
 import { playerPlayerIdLandingGet } from "../../api/api-web.nhle/playerPlayerIdLandingGet";
 import { PlayerPlayerIdLandingGet } from "../../types/playerPlayerIdLandingGet";
 import styles from './PlayerPage.module.css'
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { PlayerCharacteristics } from "./components/PlayerCharacteristics/PlayerCharacteristics";
 import { FeaturedStats } from "./components/FeaturedStats/FeaturedStats";
 import { CardTitle } from "./components/CardTitle/CardTitle";
-
-// создать константу в которой будут храниться нужные параметры с бека, записать необходимое отображение ex: 'plusMinus': '+/-', и пройтись сначала фильтром потом мапилкой при создании реакт компонента
-
-
+import { Last5Games } from "./components/Last5Games/Last5Games";
+import { Stats } from "./components/Stats/Stats";
 
 export const PlayerPage: FC = () => {
     
@@ -27,12 +25,18 @@ export const PlayerPage: FC = () => {
     return (
         <Flex justify="center">
             <Card className={styles.layout} title={(<CardTitle player={player} playerId={playerId} />)}>
-                <Flex align="center" style={{backgroundImage: `url(${player?.heroImage})`}} className={styles.heroImage}>
-                    <Flex gap={24} className={styles.playerDescription}>
-                        <img src={player?.headshot} className={styles.headShot} />
-                        <PlayerCharacteristics player={player} />
-                        <FeaturedStats player={player} />
+                <Flex vertical gap={24}>
+                    <Flex style={{backgroundImage: `url(${player?.heroImage})`}} className={styles.heroImage}>
+                        <Flex className={styles.playerDescription}>
+                            <Flex className={styles.playerInfo}>
+                                <img src={player?.headshot} className={styles.headShot} />
+                                <PlayerCharacteristics player={player} />
+                            </Flex>
+                            {player && <FeaturedStats player={player} />}
+                        </Flex>
                     </Flex>
+                    {player && <Last5Games player={player} />}
+                    {player && <Stats player={player} />}
                 </Flex>
             </Card>
         </Flex>
