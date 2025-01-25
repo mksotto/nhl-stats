@@ -8,36 +8,23 @@ type Props = {
     player: PlayerPlayerIdLandingGet
 }
 
+const filteredStats = (seasonTotals: SeasonTotal[], statsLeague: string, gameTypeId: number) => {
+    const filterByLeague = statsLeague === 'nhl' ? seasonTotals.filter((season) => season.leagueAbbrev === 'NHL') : seasonTotals;
+    return filterByLeague.filter((season) => season.gameTypeId === gameTypeId);
+}
+
 export const StatsCareer: FC<Props> = ({player}) => {
 
     if(!player.seasonTotals) return null;
 
     const [statsLeague, setStatsLeague] = useState('nhl')
-    const [gameTypeId, setGameTypeId] = useState('2')
-    const [filteredStats, setFilteredStats] = useState(player.seasonTotals)
+    const [gameTypeId, setGameTypeId] = useState(2)
 
-    const data: SeasonTotal[] = filteredStats
+    const data = filteredStats(player.seasonTotals, statsLeague, gameTypeId)
 
     const columns: TableProps<SeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
 
-    switch(statsLeague) {
-        case 'nhl': player.seasonTotals.filter((season) => season.leagueAbbrev === 'NHL')
-            switch(gameTypeId) {
-                case '2': player.seasonTotals.filter((season) => season.gameTypeId === 2)
-                    break
-                case '3': player.seasonTotals.filter((season) => season.gameTypeId === 3)
-                    break
-            }
-            break
-        case 'all':
-            switch(gameTypeId) {
-                case '2': setFilteredStats(player.seasonTotals.filter((season) => season.gameTypeId === 2))
-                    break
-                case '3': setFilteredStats(player.seasonTotals.filter((season) => season.gameTypeId === 3))
-                    break
-            }
-            break
-    }
+    
 
     return (
         <Flex vertical gap={16}>
@@ -48,14 +35,14 @@ export const StatsCareer: FC<Props> = ({player}) => {
                 <Flex gap={8}>
                     <Select
                         options={[{label: 'NHL', value: 'nhl'}, {label: 'All Leagues', value: 'all'}]}
-                        defaultValue={statsLeague}
+                        value={statsLeague}
                         onChange={(v) => setStatsLeague(v)}
                         size='large'
                         className={styles.select}
                     />
                     <Select 
-                        options={[{label: 'Regular Season', value: '2'}, {label: 'Playoffs', value: '3'}]}
-                        defaultValue={gameTypeId}
+                        options={[{label: 'Regular Season', value: 2}, {label: 'Playoffs', value: 3}]}
+                        value={gameTypeId}
                         onChange={(v) => setGameTypeId(v)}
                         size='large'
                         className={styles.select}

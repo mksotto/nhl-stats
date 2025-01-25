@@ -10,10 +10,6 @@ export const GOALIE_PARAMS = [
     {
         title: 'Season',
         dataIndex: 'season',
-        render: (season: number) => {
-
-
-            return `${String(season).substring(0, 4)}-${String(season).substring(6)}`
-        },
+        render: (season: number) => `${String(season).substring(0, 4)}-${String(season).substring(6)}`,
     }
 ]
