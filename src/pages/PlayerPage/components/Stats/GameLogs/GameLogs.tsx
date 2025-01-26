@@ -10,6 +10,7 @@ type Props = {
 export const GameLogs: FC<Props> = ({gameLog}) => {
 
     const [gameTypeId, setGameTypeId] = useState(2);
+    const [season, setSeason] = useState(gameLog.seasonId)
 
     return (
         <Flex vertical gap={16}>
@@ -19,9 +20,12 @@ export const GameLogs: FC<Props> = ({gameLog}) => {
                 </Typography.Text>
                 <Flex gap={8}>
                     <Select
-                        options={[{label: 'NHL', value: 'nhl'}, {label: 'All Leagues', value: 'all'}]}
-                        // value={gameLog}
-                        // onChange={(v) => setStatsLeague(v)}
+                        options={gameLog.playerStatsSeasons?.map((season) => ({
+                            label: `${String(season.season).substring(0, 4)}-${String(season.season).substring(6)}`,
+                            value: season.season,
+                        }))}
+                        value={season}
+                        onChange={(v) => setSeason(v)}
                         size='large'
                         className={styles.select}
                     />

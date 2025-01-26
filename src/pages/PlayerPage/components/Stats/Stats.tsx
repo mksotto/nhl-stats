@@ -33,8 +33,6 @@ export const Stats: FC<Props> = ({player, gameLog}) => {
                 centered
                 items={options}
                 style={{width: '100%'}}
-                // activeKey={currentTab}
-                // onChange={setCurrentTab}
             />
         </Flex>
     )

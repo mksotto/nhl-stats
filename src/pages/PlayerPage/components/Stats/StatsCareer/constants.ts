@@ -126,12 +126,12 @@ export const GOALIE_PARAMS: TableProps<SeasonTotal>['columns'] = [
     {
         title: 'GAA',
         dataIndex: 'goalsAgainstAvg',
-        render: (num: number) => (Math.round(num * 100) / 100).toFixed(2)
+        render: (num: number) => (num ? (Math.round(num * 100) / 100).toFixed(2) : '-')
     },
     {
         title: 'SV%',
         dataIndex: 'savePctg',
-        render: (num: number) => num.toFixed(3).replace(/^0\./, '.'),
+        render: (num: number) => (num ? num.toFixed(3).replace(/^0\./, '.') : '-'),
     },
     {
         title: 'SO',
