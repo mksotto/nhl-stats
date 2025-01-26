@@ -12,17 +12,21 @@ import { Stats } from "./components/Stats/Stats";
 import { contentEnUsPlayersGet } from "../../api/forge-dapi.d3.nhle/contentEnUsPlayersGet";
 import { ContentEnUsPlayersGet } from "../../types/contentEnUsPlayersGet";
 import { Description } from "./components/Description/Description";
+import { playerPlayerIdGameLogNowGet } from "../../api/api-web.nhle/playerPlayerIdGameLogNowGet";
+import { PlayerPlayerIdGameLogGet } from "../../types/playerPlayerIdGameLogGet";
 
 
 export const PlayerPage: FC = () => {
     
     const playerId = Number(useParams().playerId);
     const [player, setPlayer] = useState<PlayerPlayerIdLandingGet>();
-    const [description, setDescription] = useState<ContentEnUsPlayersGet>()
+    const [description, setDescription] = useState<ContentEnUsPlayersGet>();
+    const [gameLog, setGameLog] = useState<PlayerPlayerIdGameLogGet>();
     useEffect(() => {
         try {
             playerPlayerIdLandingGet(playerId).then(r => setPlayer(r))
             contentEnUsPlayersGet(playerId).then(r => setDescription(r))
+            playerPlayerIdGameLogNowGet(playerId).then(r => setGameLog(r))
         } catch (e) {
             console.error(e)
         }
@@ -42,7 +46,7 @@ export const PlayerPage: FC = () => {
                         </Flex>
                     </Flex>
                     {player && <Last5Games player={player} />}
-                    {player && <Stats player={player} />}
+                    {player && gameLog && <Stats player={player} gameLog={gameLog} />}
                     {description && description.items[0].fields.biography && <Description description={description} />}
                 </Flex>
             </Card>

@@ -3,12 +3,15 @@ import { FC } from "react";
 import styles from './Stats.module.css';
 import { StatsCareer } from "./StatsCareer/StatsCareer";
 import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
+import { GameLogs } from "./GameLogs/GameLogs";
+import { PlayerPlayerIdGameLogGet } from "../../../../types/playerPlayerIdGameLogGet";
 
 type Props = {
-    player: PlayerPlayerIdLandingGet
+    player: PlayerPlayerIdLandingGet,
+    gameLog: PlayerPlayerIdGameLogGet,
 }
 
-export const Stats: FC<Props> = ({player}) => {
+export const Stats: FC<Props> = ({player, gameLog}) => {
     const options = [
         {
             label: 'Career',
@@ -18,7 +21,7 @@ export const Stats: FC<Props> = ({player}) => {
         {
             label: 'Game Logs',
             key: 'gameLogs',
-            children: 'Tab2',
+            children: <GameLogs gameLog={gameLog} />,
         }
     ]
 
