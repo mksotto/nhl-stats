@@ -1,4 +1,7 @@
-export const SKATER_PARAMS = [
+import { TableProps } from "antd"
+import { Last5Game } from "../../../../types/playerPlayerIdLandingGet"
+
+export const SKATER_PARAMS: TableProps<Last5Game>['columns'] = [
     {
         title: 'Date',
         dataIndex: 'gameDate',
@@ -68,11 +71,12 @@ export const GOALIE_PARAMS = [
     },
     {
        title: 'GA',
-       dataIndex: 'goalsAgainst', 
+       dataIndex: 'goalsAgainst',
     },
     {
        title: 'SV%',
-       dataIndex: 'savePctg', 
+       dataIndex: 'savePctg',
+       render: (num: number) => num.toFixed(3).replace(/^0\./, '.'),
     },
     {
        title: 'TOI',

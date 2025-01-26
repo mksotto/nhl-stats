@@ -82,9 +82,13 @@ export interface SeasonTotal {
     faceoffWinningPctg?:           number;
     gameTypeId:                    number;
     gameWinningGoals?:             number;
+    gamesStarted?:                 number;
     gamesPlayed:                   number;
-    goals:                         number;
+    goals?:                         number;
+    goalsAgainst?:                  number;
+    goalsAgainstAvg?:               number;
     leagueAbbrev:                  string;
+    losses?:                       number;
     otGoals?:                      number;
     pim:                           number;
     plusMinus?:                    number;
@@ -93,6 +97,12 @@ export interface SeasonTotal {
     powerPlayPoints?:              number;
     season:                        number;
     sequence:                      number;
+    shutouts:                      number;
+    ties?:                         number;
+    timeOnIce?:                    string;
+    wins?:                         number;
+    savePctg?:                     number;
+    shotsAgainst?:                 number;
     shootingPctg?:                 number;
     shorthandedGoals?:             number;
     shorthandedPoints?:            number;
@@ -100,6 +110,7 @@ export interface SeasonTotal {
     teamCommonName?:               Name;
     teamName:                      Name;
     teamPlaceNameWithPreposition?: Name;
+    otLosses?:                     number;
 }
 
 export interface Award {
