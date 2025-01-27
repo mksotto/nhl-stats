@@ -20,58 +20,80 @@ export const SKATER_PARAMS: TableProps<SeasonTotal>['columns'] = [
     {
         title: 'GP',
         dataIndex: 'gamesPlayed',
+        render: (gamesPlayed: number) => (gamesPlayed ? gamesPlayed : '-'),
     },
     {
         title: 'G',
         dataIndex: 'goals',
+        render: (goals: number) => (goals ? goals : '-'),
     },
     {
         title: 'A',
         dataIndex: 'assists',
+        render: (assists: number) => (assists ? assists : '-'),
     },
     {
         title: 'P',
         dataIndex: 'points',
+        render: (points: number) => (points ? points : '-'),
     },
     {
         title: '+/-',
         dataIndex: 'plusMinus',
+        render: (plusMinus: number) => {
+            if (plusMinus > 0) {
+               return `+${plusMinus}`
+            } else if (plusMinus <= 0) {
+               return plusMinus
+            } else {
+                return '-'
+            }
+           }
     },
     {
         title: 'PIM',
         dataIndex: 'pim',
+        render: (pim: number) => (pim ? pim : '-'),
     },
     {
         title: 'PPG',
         dataIndex: 'powerPlayGoals',
+        render: (powerPlayGoals: number) => (powerPlayGoals ? powerPlayGoals : '-'),
     },
     {
         title: 'PPP',
         dataIndex: 'powerPlayPoints',
+        render: (powerPlayPoints: number) => (powerPlayPoints ? powerPlayPoints : '-'),
     },
     {
         title: 'SHG',
         dataIndex: 'shorthandedGoals',
+        render: (shorthandedGoals: number) => (shorthandedGoals ? shorthandedGoals : '-'),
     },
     {
         title: 'SHP',
         dataIndex: 'shorthandedPoints',
+        render: (shorthandedPoints: number) => (shorthandedPoints ? shorthandedPoints : '-'),
     },
     {
         title: 'TOI',
         dataIndex: 'avgToi',
+        render: (avgToi: number) => (avgToi ? avgToi : '-'),
     },
     {
         title: 'GWG',
         dataIndex: 'gameWinningGoals',
+        render: (gameWinningGoals: number) => (gameWinningGoals ? gameWinningGoals : '-'),
     },
     {
         title: 'OTG',
         dataIndex: 'otGoals',
+        render: (otGoals: number) => (otGoals ? otGoals : '-'),
     },
     {
         title: 'S',
         dataIndex: 'shots',
+        render: (shots: number) => (shots ? shots : '-'),
     },
     {
         title: 'S%',
@@ -103,25 +125,31 @@ export const GOALIE_PARAMS: TableProps<SeasonTotal>['columns'] = [
     {
         title: 'GP',
         dataIndex: 'gamesPlayed',
+        render: (gamesPlayed: number) => (gamesPlayed ? gamesPlayed : '-'),
     },
     {
         title: 'GS',
         dataIndex: 'gamesStarted',
+        render: (gamesStarted: number) => (gamesStarted ? gamesStarted : '-'),
     },
     {
         title: 'W',
         dataIndex: 'wins',
+        render: (wins: number) => (wins ? wins : '-'),
     },
     {
         title: 'L',
         dataIndex: 'losses',
+        render: (losses: number) => (losses ? losses : '-'),
     },{
         title: 'OT',
         dataIndex: 'otLosses',
+        render: (otLosses: number) => (otLosses ? otLosses : '-'),
     },
     {
         title: 'SA',
         dataIndex: 'shotsAgainst',
+        render: (shotsAgainst: number) => (shotsAgainst ? shotsAgainst : '-'),
     },
     {
         title: 'GAA',
@@ -136,21 +164,26 @@ export const GOALIE_PARAMS: TableProps<SeasonTotal>['columns'] = [
     {
         title: 'SO',
         dataIndex: 'shutouts',
+        render: (shutouts: number) => (shutouts ? shutouts : '-'),
     },
     {
         title: 'G',
         dataIndex: 'goals',
+        render: (goals: number) => (goals ? goals : '-'),
     },
     {
         title: 'A',
         dataIndex: 'assists',
+        render: (assists: number) => (assists ? assists : '-'),
     },
     {
         title: 'PIM',
         dataIndex: 'pim',
+        render: (pim: number) => (pim ? pim : '-'),
     },
     {
         title: 'TOI',
         dataIndex: 'timeOnIce',
+        render: (timeOnIce: number) => (timeOnIce ? timeOnIce : '-'),
     },
 ]

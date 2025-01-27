@@ -8,10 +8,10 @@ import { PlayerPlayerIdGameLogGet } from "../../../../types/playerPlayerIdGameLo
 
 type Props = {
     player: PlayerPlayerIdLandingGet,
-    gameLog: PlayerPlayerIdGameLogGet,
+    playerId: number,
 }
 
-export const Stats: FC<Props> = ({player, gameLog}) => {
+export const Stats: FC<Props> = ({player, playerId}) => {
     const options = [
         {
             label: 'Career',
@@ -21,7 +21,7 @@ export const Stats: FC<Props> = ({player, gameLog}) => {
         {
             label: 'Game Logs',
             key: 'gameLogs',
-            children: <GameLogs gameLog={gameLog} />,
+            children: <GameLogs playerId={playerId} />,
         }
     ]
 

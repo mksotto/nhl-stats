@@ -24,7 +24,14 @@ export const SKATER_PARAMS: TableProps<Last5Game>['columns'] = [
      },
      {
         title: '+/-',
-        dataIndex: 'plusMinus', 
+        dataIndex: 'plusMinus',
+        render: (plusMinus: number) => {
+         if (plusMinus > 0) {
+            return `+${plusMinus}`
+         } else {
+            return plusMinus
+         }
+        }
      },
      {
         title: 'PPG',
@@ -59,11 +66,12 @@ export const GOALIE_PARAMS = [
     },
     {
        title: 'GS',
-       dataIndex: 'gamesStarted', 
+       dataIndex: 'gamesStarted',
     },
     {
        title: 'DEC',
-       dataIndex: 'decision', 
+       dataIndex: 'decision',
+       render: (decision: string) => (decision ? decision : '-')
     },
     {
        title: 'SA',
@@ -76,7 +84,7 @@ export const GOALIE_PARAMS = [
     {
        title: 'SV%',
        dataIndex: 'savePctg',
-       render: (num: number) => num.toFixed(3).replace(/^0\./, '.'),
+       render: (num: number) => (num ? num.toFixed(3).replace(/^0\./, '.') : '-'),
     },
     {
        title: 'TOI',

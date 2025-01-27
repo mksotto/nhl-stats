@@ -5,6 +5,8 @@ import { Card, Flex, Input } from "antd";
 import { SearchResult } from "./SearchResult/SearchResult";
 import { useNavigate } from "react-router-dom";
 import styles from './SearchPlayerPage.module.css'
+import { useSearchPlayer } from "../../queries/useSearchPlayer";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export const SearchPlayerPage: FC = () => {
     const navigate = useNavigate();
@@ -24,13 +26,25 @@ export const SearchPlayerPage: FC = () => {
             console.error(e)
         }
     }, [])
+    const [searchPlayer, setSearchPlayer] = useState<string>('');
+    const debounceSearch = useDebounce(searchPlayer, 500);
 
-    console.log(spotlightPlayer)
+    const {data: players} = useSearchPlayer(debounceSearch)
+    
+    // сделать два компонента и через тернарник рисовать либо спотлайт либо плауер
+
     return (
         <Flex justify="center">
             <Card className={styles.layout}>
-                <Input.Search className={styles.inputPlayer} />
+                <Input.Search 
+                    className={styles.inputPlayer}
+                    size="large"
+                    value={searchPlayer}
+                    onChange={(v) => setSearchPlayer(v.target.value)}
+                />
                 <div className={styles.playersCard}>
+
+
                     {spotlightPlayer?.map((player) => (
                         <SearchResult 
                             key={player.playerId}
@@ -39,6 +53,8 @@ export const SearchPlayerPage: FC = () => {
                         />
                     )
                     )}
+
+                    
                 </div>
             </Card>
         </Flex>

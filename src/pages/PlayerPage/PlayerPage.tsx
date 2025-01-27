@@ -1,7 +1,5 @@
 import { Card, Flex } from "antd";
 import { FC, useEffect, useState } from "react";
-import { playerPlayerIdLandingGet } from "../../api/api-web.nhle/playerPlayerIdLandingGet";
-import { PlayerPlayerIdLandingGet } from "../../types/playerPlayerIdLandingGet";
 import styles from './PlayerPage.module.css'
 import { useParams } from "react-router-dom";
 import { PlayerCharacteristics } from "./components/PlayerCharacteristics/PlayerCharacteristics";
@@ -9,28 +7,14 @@ import { FeaturedStats } from "./components/FeaturedStats/FeaturedStats";
 import { CardTitle } from "./components/CardTitle/CardTitle";
 import { Last5Games } from "./components/Last5Games/Last5Games";
 import { Stats } from "./components/Stats/Stats";
-import { contentEnUsPlayersGet } from "../../api/forge-dapi.d3.nhle/contentEnUsPlayersGet";
-import { ContentEnUsPlayersGet } from "../../types/contentEnUsPlayersGet";
 import { Description } from "./components/Description/Description";
-import { playerPlayerIdGameLogNowGet } from "../../api/api-web.nhle/playerPlayerIdGameLogNowGet";
-import { PlayerPlayerIdGameLogGet } from "../../types/playerPlayerIdGameLogGet";
+import { usePlayerPlayerIdLanding } from "../../queries/usePlayerPlayerIdLanding";
 
 
 export const PlayerPage: FC = () => {
     
     const playerId = Number(useParams().playerId);
-    const [player, setPlayer] = useState<PlayerPlayerIdLandingGet>();
-    const [description, setDescription] = useState<ContentEnUsPlayersGet>();
-    const [gameLog, setGameLog] = useState<PlayerPlayerIdGameLogGet>();
-    useEffect(() => {
-        try {
-            playerPlayerIdLandingGet(playerId).then(r => setPlayer(r))
-            contentEnUsPlayersGet(playerId).then(r => setDescription(r))
-            playerPlayerIdGameLogNowGet(playerId).then(r => setGameLog(r))
-        } catch (e) {
-            console.error(e)
-        }
-    }, [playerId]);
+    const {data: player} = usePlayerPlayerIdLanding(playerId)
 
     return (
         <Flex justify="center">
@@ -46,8 +30,8 @@ export const PlayerPage: FC = () => {
                         </Flex>
                     </Flex>
                     {player && <Last5Games player={player} />}
-                    {player && gameLog && <Stats player={player} gameLog={gameLog} />}
-                    {description && description.items[0].fields.biography && <Description description={description} />}
+                    {player && <Stats player={player} playerId={playerId} />}
+                    <Description playerId={playerId} />
                 </Flex>
             </Card>
         </Flex>
