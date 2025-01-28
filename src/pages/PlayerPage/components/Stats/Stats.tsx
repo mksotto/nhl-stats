@@ -4,7 +4,6 @@ import styles from './Stats.module.css';
 import { StatsCareer } from "./StatsCareer/StatsCareer";
 import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
 import { GameLogs } from "./GameLogs/GameLogs";
-import { PlayerPlayerIdGameLogGet } from "../../../../types/playerPlayerIdGameLogGet";
 
 type Props = {
     player: PlayerPlayerIdLandingGet,
@@ -21,7 +20,7 @@ export const Stats: FC<Props> = ({player, playerId}) => {
         {
             label: 'Game Logs',
             key: 'gameLogs',
-            children: <GameLogs playerId={playerId} />,
+            children: <GameLogs playerId={playerId} position={player.position} />,
         }
     ]
 

@@ -2,7 +2,6 @@ import { FC } from "react";
 import styles from './Description.module.css'
 import { Flex, Typography } from "antd";
 import Markdown from "marked-react";
-import { ContentEnUsPlayersGet } from "../../../../types/contentEnUsPlayersGet";
 import { useContentEnUsPlayers } from "../../../../queries/useContentEnUsPlayers";
 
 type Props = {
@@ -27,6 +26,5 @@ export const Description: FC<Props> = ({playerId}) => {
                 ))}
             </div>
         </Flex>
-        
     )
 }

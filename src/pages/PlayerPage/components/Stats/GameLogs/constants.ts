@@ -1,12 +1,16 @@
 import { TableProps } from "antd"
-import { Last5Game } from "../../../../types/playerPlayerIdLandingGet"
+import { GameLog } from "../../../../../types/playerPlayerIdGameLogGet"
 import dayjs from "dayjs"
 
-export const SKATER_PARAMS: TableProps<Last5Game>['columns'] = [
+export const SKATER_PARAMS: TableProps<GameLog>['columns'] = [
     {
         title: 'Date',
         dataIndex: 'gameDate',
-        render: (gameDate: string) => dayjs(gameDate).format('DD MMM YYYY')
+        render: (gameDate: string) => dayjs(gameDate).format('DD MMM YYYY'),
+    },
+    {
+        title: 'Team',
+        dataIndex: 'teamAbbrev',
     },
     {
         title: 'Opp',
@@ -36,12 +40,32 @@ export const SKATER_PARAMS: TableProps<Last5Game>['columns'] = [
         }
      },
      {
+        title: 'PIM',
+        dataIndex: 'pim',
+     },
+     {
         title: 'PPG',
         dataIndex: 'powerPlayGoals', 
      },
      {
+        title: 'PPP',
+        dataIndex: 'powerPlayPoints',
+     },
+     {
         title: 'SHG',
         dataIndex: 'shorthandedGoals', 
+     },
+     {
+        title: 'SHP',
+        dataIndex: 'shorthandedPoints', 
+     },
+     {
+        title: 'GWG',
+        dataIndex: 'gameWinningGoals', 
+     },
+     {
+        title: 'OTG',
+        dataIndex: 'otGoals', 
      },
      {
         title: 'S',
@@ -62,6 +86,10 @@ export const GOALIE_PARAMS = [
         title: 'Date',
         dataIndex: 'gameDate',
         render: (gameDate: string) => dayjs(gameDate).format('DD MMM YYYY'),
+    },
+    {
+        title: 'Team',
+        dataIndex: 'teamAbbrev',
     },
     {
         title: 'Opp',
@@ -88,6 +116,18 @@ export const GOALIE_PARAMS = [
        title: 'SV%',
        dataIndex: 'savePctg',
        render: (num: number) => (num ? num.toFixed(3).replace(/^0\./, '.') : '-'),
+    },
+    {
+        title: 'G',
+        dataIndex: 'goals', 
+    },
+    {
+        title: 'A',
+        dataIndex: 'assists', 
+    },
+    {
+        title: 'PIM',
+        dataIndex: 'pim',
     },
     {
        title: 'TOI',

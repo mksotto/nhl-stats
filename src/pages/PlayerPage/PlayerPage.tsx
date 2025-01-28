@@ -1,5 +1,5 @@
 import { Card, Flex } from "antd";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from './PlayerPage.module.css'
 import { useParams } from "react-router-dom";
 import { PlayerCharacteristics } from "./components/PlayerCharacteristics/PlayerCharacteristics";

@@ -2,11 +2,12 @@ import { FC, useEffect, useState } from "react";
 import { playerSpotlightGet } from "../../api/api-web.nhle/playerSpotlightGet";
 import { PlayerSpotlightGet } from "../../types/playerSpotlightGet";
 import { Card, Flex, Input } from "antd";
-import { SearchResult } from "./SearchResult/SearchResult";
+import { SpotlightPlayers } from "./SpotlightPlayer/SpotlightPlayers";
 import { useNavigate } from "react-router-dom";
 import styles from './SearchPlayerPage.module.css'
 import { useSearchPlayer } from "../../queries/useSearchPlayer";
 import { useDebounce } from "@uidotdev/usehooks";
+import { SearchResult } from "./SearchResult/SearchResult";
 
 export const SearchPlayerPage: FC = () => {
     const navigate = useNavigate();
@@ -31,8 +32,6 @@ export const SearchPlayerPage: FC = () => {
 
     const {data: players} = useSearchPlayer(debounceSearch)
     
-    // сделать два компонента и через тернарник рисовать либо спотлайт либо плауер
-
     return (
         <Flex justify="center">
             <Card className={styles.layout}>
@@ -43,18 +42,22 @@ export const SearchPlayerPage: FC = () => {
                     onChange={(v) => setSearchPlayer(v.target.value)}
                 />
                 <div className={styles.playersCard}>
-
-
-                    {spotlightPlayer?.map((player) => (
-                        <SearchResult 
-                            key={player.playerId}
-                            player={player}
-                            onClick={() => {navigate(`/player/${player.playerId}`)}}
-                        />
-                    )
-                    )}
-
-                    
+                    {(players 
+                        ? players?.map((player) => (
+                            <SearchResult 
+                                key={player.playerId}
+                                player={player}
+                                onClick={() => {navigate(`/player/${player.playerId}`)}}
+                            />
+                        )) 
+                        : spotlightPlayer?.map((player) => (
+                            <SpotlightPlayers 
+                                key={player.playerId}
+                                player={player}
+                                onClick={() => {navigate(`/player/${player.playerId}`)}}
+                            />
+                        ))
+                    )}                    
                 </div>
             </Card>
         </Flex>

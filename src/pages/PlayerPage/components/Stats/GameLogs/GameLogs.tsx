@@ -1,27 +1,41 @@
-import { Flex, Select, Table, Typography } from "antd";
+import { Flex, Select, Table, TableProps, Typography } from "antd";
 import { FC, useEffect, useState } from "react";
 import styles from './GameLogs.module.css'
 import { usePlayerPlayerIdGameLogNow } from "../../../../../queries/usePlayerPlayerIdGameLogNow";
-import { usePlayerPlayerIdGameLogGameType } from "../../../../../queries/usePlayerPlayerIdGameLogGameType";
+import { usePlayerPlayerIdGameLogSeasonGameType } from "../../../../../queries/usePlayerPlayerIdGameLogSeasonGameType";
+import { GameLog } from "../../../../../types/playerPlayerIdGameLogGet";
+import { GOALIE_PARAMS, SKATER_PARAMS } from "./constants";
 
 type Props = {
-    playerId: number
+    playerId: number,
+    position: string,
 }
 
-export const GameLogs: FC<Props> = ({playerId}) => {
-
-    const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(playerId)
+export const GameLogs: FC<Props> = ({playerId, position}) => {
 
     const [season, setSeason] = useState<number>();
     const [gameTypeId, setGameTypeId] = useState<number>(2);
+    const [tableData, setTableData] = useState<GameLog[]>()
     
-    const {data: gameLog} = usePlayerPlayerIdGameLogGameType(playerId, season, gameTypeId)
+    const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(playerId)
+    const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(playerId, season, gameTypeId)
+
     useEffect(() => {
         setSeason(gameLogNow?.seasonId)
+        setTableData(gameLogNow?.gameLog)
     }, [gameLogNow])
+
     useEffect(() => {
         setGameTypeId((gameLogNow?.playerStatsSeasons.find((s) => s.season === season)?.gameTypes.includes(gameTypeId) ? gameTypeId : 2))
     }, [season])
+
+    useEffect(() => {
+        setTableData(gameLog?.gameLog)
+    }, [gameLog])
+
+    const data = tableData;
+
+    const columns: TableProps<GameLog>['columns'] = (position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS);
 
     return (
         <Flex vertical gap={16}>
@@ -49,7 +63,7 @@ export const GameLogs: FC<Props> = ({playerId}) => {
                     />
                 </Flex>
             </Flex>
-            <Table /*columns={columns} dataSource={data}*/ pagination={false} />
+            <Table columns={columns} dataSource={data} pagination={false} />
         </Flex>
     )
 }
