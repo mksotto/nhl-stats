@@ -1,4 +1,7 @@
-
+.tabs {
+    width: 100%;
+    margin-top: -16px;
+}
 
 @media (max-width: 599px) {
     .container {
@@ -27,7 +30,7 @@
 
 @media (min-width: 600px) {
     .container {
-        padding-top: 16px;
+         padding-top: 16px;
     }
 
     .playerInfo {
