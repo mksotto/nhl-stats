@@ -1,3 +1,12 @@
+.arrow {
+    padding: 0 24px;
+    min-width: 0;
+}
+
+.arrow :global(.slick-arrow) {
+    color: black;
+}
+
 .statsContainer {
     flex-direction: column;
     gap: 16px;

@@ -8,21 +8,22 @@
 .heroImage {
     width: calc(100% + 48px);
     height: 720px;
-    margin: -24px -24px 0px -24px;
+    margin: -24px -24px 0 -24px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .playerDescription {
     position: relative;
+    max-width: 1440px;
     width: 100%;
     height: 256px;
     align-items: center;
     top: 464px;
     backdrop-filter: blur(8px);
     background: rgba(255, 255, 255, 0.8);
-    padding: 24px;
-    gap: 12px;
+    padding: 24px 0 24px 24px;
 }
 
 .headShot {

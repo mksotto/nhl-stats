@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
-// import { Flex, Typography } from "antd";
-// import styles from './FeaturedStats.module.css'
+import styles from './FeaturedStats.module.css'
+import {Carousel} from "antd";
 import {FeaturesStatsRegular} from "./FeaturesStatsRegular/FeaturesStatsRegular.tsx";
 import {FeaturesStatsPlayoff} from "./FeaturedStatsPlayoff/FeaturedStatsPlayoff.tsx";
 
@@ -31,9 +31,16 @@ export const FeaturedStats: FC<Props> = ({player}) => {
     // const featuredStatsPlayoffCareer = Object.entries(player.featuredStats?.playoffs?.career || {}).filter((item) => FEATURED_STATS[item[0]])
 
     return(
-        <>
+        <Carousel
+            rootClassName={styles.arrow}
+            // className={styles.arrow}
+            arrows
+            infinite={false}
+            dots={false}
+            style={{maxHeight: 208, minWidth: 0}}
+        >
             <FeaturesStatsRegular player={player} />
             <FeaturesStatsPlayoff player={player} />
-        </>
+        </Carousel>
     )
 }

@@ -25,7 +25,7 @@ export const FeaturesStatsPlayoff: FC<Props> = ({player}) => {
 
     const featuredStatsPlayoffSeason = Object.entries(player.featuredStats?.playoffs?.subSeason || {}).filter((item) => FEATURED_STATS[item[0]])
     const featuredStatsPlayoffCareer = Object.entries(player.featuredStats?.playoffs?.career || {}).filter((item) => FEATURED_STATS[item[0]])
-
+    if (!featuredStatsPlayoffSeason.length || !featuredStatsPlayoffCareer.length ) {return null}
 
     return (
         <Flex className={styles.statsContainer}>
