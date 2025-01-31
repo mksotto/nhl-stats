@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { LeaderPlayer } from "../../types/base";
+import React, { FC } from "react";
+import {LeaderPlayer} from "../../../../../../types/base.ts";
 import { Flex } from "antd";
-import styles from './playerItem.module.css'
+import styles from './PlayersListItem.module.css'
 import cx from 'classnames'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
     onMouseEnter: React.MouseEventHandler<HTMLElement>
 }
 
-export const PlayerItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter}) => {
+export const PlayersListItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter}) => {
 
     return (
         <Flex onMouseEnter={onMouseEnter} className={cx(styles.skatersTable, {
@@ -22,7 +22,7 @@ export const PlayerItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter})
                 <div className={styles.name}>
                     {player.firstName.default} {player.lastName.default}
                 </div>
-                <div className={styles.value}>{player.value}</div>
+                <div className={styles.value}>{player.value}</div>{/*проверить как работает округление значений*/}
             </Flex>
         </Flex>
     )

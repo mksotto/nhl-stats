@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Card, Flex } from "antd";
 import styles from './LeaderStats.module.css'
-import { LeaderSkaters } from "./components/LeaderSkaters/LeaderSkaters";
-import { LeaderGoalies } from "./components/LeaderGoalies/LeaderGoalies";
+import { LeaderPlayers } from "./components/LeaderPlayers.tsx";
 
 export const LeaderStats: FC = () => {
     
@@ -10,10 +9,10 @@ export const LeaderStats: FC = () => {
         <Flex justify="center">
             <Card className={styles.layout}>
                 <Flex className={styles.container}>
-                    <LeaderSkaters />
-                    <LeaderGoalies />
-                    <LeaderSkaters />
-                    <LeaderGoalies />
+                    <LeaderPlayers skater />
+                    <LeaderPlayers skater />
+                    <LeaderPlayers goalie />
+                    <LeaderPlayers goalie />
                 </Flex>
             </Card>
         </Flex>

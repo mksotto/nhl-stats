@@ -23,5 +23,5 @@ export interface LeaderPlayer {
     teamName:      Name;
     teamLogo:      string;
     position:      PositionCode;
-    value:         number;
+    value:         number | string;
 }

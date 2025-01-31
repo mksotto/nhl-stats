@@ -1,11 +1,11 @@
 .image {
-    cx: 64;
-    cy: 70;
-    r: 56;
+    /*cx: 64;*/
+    /*cy: 70;*/
+    /*r: 56;*/
     fill: rgb(238, 238, 238);
     stroke: rgb(229, 229, 229);
     stroke-width: 2px;
-    border-radius: 0% 0% 50% 50%;
+    border-radius: 0 0 50% 50%;
 }
 
 .skaterName {

@@ -1,11 +1,14 @@
 import {FC, useState} from 'react';
 import { Flex, Segmented } from 'antd';
 import { LeaderStats } from './components/LeaderStats/LeaderStats';
+import {SearchPlayerPage} from "../SearchPlayerPage/SearchPlayerPage.tsx";
 
 const getPage = (currentTab: string) => {
     switch(currentTab) {
         case 'home':
             return (<LeaderStats />);
+        case 'search':
+            return (<SearchPlayerPage />);
         case 'skaters':
             return (<div>dasda</div>);
         case 'goalie':
@@ -23,10 +26,11 @@ export const MainPage: FC = () => {
             <Flex justify='center' gap={8}>
                 <Segmented 
                     options={[
-                        {value: 'home', label: 'Home'}, 
-                        {value: 'skaters', label: 'Skaters'}, 
-                        {value: 'goalie', label: 'Goalie'}, 
-                        {value: 'teams', label: 'Teams'},
+                        {value: 'home', label: 'Home'},
+                        {value: 'search', label: 'Search'},
+                        // {value: 'skaters', label: 'Skaters'},
+                        // {value: 'goalie', label: 'Goalie'},
+                        // {value: 'teams', label: 'Teams'},
                     ]}
                     size='large'
                     value={tabValue}
