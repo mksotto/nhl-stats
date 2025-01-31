@@ -2,6 +2,7 @@ import {FC} from "react";
 import {PlayerPlayerIdLandingGet} from "../../../../../types/playerPlayerIdLandingGet.ts";
 import styles from "../FeaturedStats.module.css";
 import {Flex, Typography} from "antd";
+import {curatedFeaturedStats} from "../utils/curatedFeaturedStats.ts";
 
 type Props = {
     player: PlayerPlayerIdLandingGet
@@ -24,7 +25,10 @@ export const FeaturesStatsRegular: FC<Props> = ({player}) => {
     const seasonString = String(player.featuredStats?.season);
 
     const featuredStatsRegularSeason = Object.entries(player.featuredStats?.regularSeason.subSeason || {}).filter((item) => FEATURED_STATS[item[0]])
-    const featuredStatsRegularCareer = Object.entries(player.featuredStats?.regularSeason.career || {}).filter((item) => FEATURED_STATS[item[0]])
+    const featuredStatsRegularCareer = Object
+        .entries(player.featuredStats?.regularSeason.career || {})
+        .filter((item) => FEATURED_STATS[item[0]])
+        .map(curatedFeaturedStats) as [string, string | number][]
 
 
     return (

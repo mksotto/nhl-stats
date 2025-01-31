@@ -25,7 +25,7 @@ export interface CareerTotals {
     playoffs:      PlayerStats;
 }
 
-export interface PlayerStats {
+export type PlayerStats = {
     assists?:             number;
     avgToi?:              string;
     faceoffWinningPctg?:  number;

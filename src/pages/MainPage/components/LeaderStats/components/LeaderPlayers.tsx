@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import { Card, Flex, Tabs, TabsProps } from "antd";
 import { LeaderPlayer } from "../../../../../types/base";
 import {PlayerStatsLeadersCurrentGet} from "../../../../../types/playerStatsLeadersCurrentGet.ts";
@@ -78,7 +78,7 @@ export const LeaderPlayers: FC<Props> = ({skater, goalie}) => {
             />
             <Flex className={styles.container}>
                 <Flex className={styles.playerInfo}>
-                    <LeaderPlayerInfo player={player} currentTab={currentTab}/>
+                    {player && <LeaderPlayerInfo player={player} currentTab={currentTab}/>}
                 </Flex>
                 <Flex vertical gap={8} className={styles.playersList}>
                     {players?.[currentTab].map((p, key) => (
@@ -87,7 +87,9 @@ export const LeaderPlayers: FC<Props> = ({skater, goalie}) => {
                             onMouseEnter={() => {setPlayer(p); setPlayerId(key)}}
                             player={p}
                             keyOfItem={key+1}
-                            active={player?.id === p.id} />
+                            active={player?.id === p.id}
+                            currentTab={currentTab}
+                        />
                     ))}
                 </Flex>
             </Flex>
