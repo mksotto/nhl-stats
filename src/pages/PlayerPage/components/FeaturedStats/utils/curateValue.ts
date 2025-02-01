@@ -1,4 +1,4 @@
-export const curatedFeaturedStats = ([key, value]: [string, string | number]) => {
+export const curateValue = ([key, value]: [string, string | number]) => {
     if (key === 'savePctg') {
         return [
             key,

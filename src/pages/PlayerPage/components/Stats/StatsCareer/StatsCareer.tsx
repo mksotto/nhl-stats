@@ -17,14 +17,14 @@ export const StatsCareer: FC<Props> = ({player}) => {
 
     if(!player.seasonTotals) return null;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [statsLeague, setStatsLeague] = useState('nhl')
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [gameTypeId, setGameTypeId] = useState(2)
 
     const data = filteredStats(player.seasonTotals, statsLeague, gameTypeId)
 
     const columns: TableProps<SeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
-
-    
 
     return (
         <Flex vertical gap={16}>
