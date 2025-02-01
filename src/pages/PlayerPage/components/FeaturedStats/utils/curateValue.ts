@@ -1,4 +1,4 @@
-export const curateValue = ([key, value]: [string, string | number]) => {
+export const curateValue = ([key, value]: [string, string | number | undefined]) => {
     if (key === 'savePctg') {
         return [
             key,
@@ -11,5 +11,5 @@ export const curateValue = ([key, value]: [string, string | number]) => {
             (Math.round(Number(value) * 100) / 100).toFixed(2)
         ]
     }
-    return [key, value]
+    return [key, value || 0]
 }

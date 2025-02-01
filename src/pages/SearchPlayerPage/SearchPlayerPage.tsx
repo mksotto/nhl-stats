@@ -39,7 +39,7 @@ export const SearchPlayerPage: FC = () => {
                     className={styles.inputPlayer}
                     size="large"
                     value={searchPlayer}
-                    onChange={(v) => setSearchPlayer(v.target.value)}
+                    onChange={(e) => setSearchPlayer(e.target.value)}
                 />
                 <div className={styles.playersCard}>
                     {(players 

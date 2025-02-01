@@ -1,10 +1,10 @@
 import React, {FC} from "react";
-import {LeaderPlayer} from "../../../../../../types/base.ts";
+import {LeaderPlayer} from "../../../../../../../types/base.ts";
 import { Flex } from "antd";
 import styles from './PlayersListItem.module.css'
 import cx from 'classnames'
-import {PlayerStatsLeadersGet} from "../../../../../../types/playerStatsLeadersGet.ts";
-import {curatedPlayer} from "../../utils/cureatedPlayer.ts";
+import {PlayerStatsLeadersGet} from "../../../../../../../types/playerStatsLeadersGet.ts";
+import {curatedPlayer} from "../../../utils/cureatedPlayer.ts";
 
 type Props = {
     player: LeaderPlayer,

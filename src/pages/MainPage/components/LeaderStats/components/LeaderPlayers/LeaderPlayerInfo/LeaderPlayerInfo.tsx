@@ -1,10 +1,10 @@
 import {FC} from "react";
 import { useNavigate } from "react-router-dom";
 import { Flex, Image } from "antd";
-import { LeaderPlayer } from "../../../../../../types/base";
-import {PlayerStatsLeadersGet} from "../../../../../../types/playerStatsLeadersGet.ts";
+import { LeaderPlayer } from "../../../../../../../types/base.ts";
+import {PlayerStatsLeadersGet} from "../../../../../../../types/playerStatsLeadersGet.ts";
 import styles from './LeaderPlayerInfo.module.css'
-import {curatedPlayer} from "../../utils/cureatedPlayer.ts";
+import {curatedPlayer} from "../../../utils/cureatedPlayer.ts";
 
 type Props = {
     player: LeaderPlayer;
@@ -47,7 +47,7 @@ export const LeaderPlayerInfo: FC<Props> = ({player, currentTab}) => {
                         <div className={styles.skaterName}>{playerModified.lastName.default}</div>
                     </Flex>
                     <Flex gap={2} className={styles.skaterInfo}>
-                        <img className={styles.teamLogo} src={playerModified.teamLogo} />
+                        <img className={styles.teamLogo} src={playerModified.teamLogo} alt='' />
                         <div>{playerModified.teamAbbrev}</div>
                         <div>•</div>
                         <div>{`#${playerModified.sweaterNumber}`}</div>

@@ -1,4 +1,4 @@
-import {FEATURED_STATS} from "../constants/constants.ts";
+import {FEATURED_STATS_GOALIES, FEATURED_STATS_PLAYER} from "../constants/constants.ts";
 import {curateValue} from "./curateValue.ts";
 import {PlayerPlayerIdLandingGet} from "../../../../../types/playerPlayerIdLandingGet.ts";
 
@@ -7,7 +7,7 @@ type Props = [
     typeOfSeason: 'regularSeason' | 'playoffs',
     time: 'subSeason' | 'playoffs' | 'career',
 ]
-type FeaturedStats = (...props: Props) => { title: string, stats: [string, string | number][] | undefined }
+type FeaturedStats = (...props: Props) => { title: string, stats: (string | number)[][] | undefined }
 
 export const curateFeaturedStats: FeaturedStats = (player, typeOfSeason, time) => {
 
@@ -22,10 +22,10 @@ export const curateFeaturedStats: FeaturedStats = (player, typeOfSeason, time) =
         if (!player.featuredStats) return undefined
         const featuredStats = player.featuredStats[typeOfSeason]?.[time]
         if (!featuredStats) return undefined
-        return Object
-            .entries(featuredStats)
-            .filter((item) => FEATURED_STATS[item[0]])
-            .map(curateValue) as [string, string | number][]
+        if (player.position === 'G') {
+            return FEATURED_STATS_GOALIES.map((key) => curateValue([key, featuredStats[key]]))
+        }
+        return FEATURED_STATS_PLAYER.map((key) => curateValue([key, featuredStats[key]]))
     }
 
     const title = selectTitle()

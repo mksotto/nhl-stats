@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import { Card, Flex, Tabs, TabsProps } from "antd";
-import { LeaderPlayer } from "../../../../../types/base";
-import {PlayerStatsLeadersGet} from "../../../../../types/playerStatsLeadersGet.ts";
-import { skaterStatsLeadersCurrentGet } from "../../../../../api/api-web.nhle/skaterStatsLeadersCurrentGet";
-import { goalieStatsLeadersCurrentGet } from "../../../../../api/api-web.nhle/goalieStatsLeadersCurrentGet.ts";
+import { LeaderPlayer } from "../../../../../../types/base.ts";
+import {PlayerStatsLeadersGet} from "../../../../../../types/playerStatsLeadersGet.ts";
+import { skaterStatsLeadersCurrentGet } from "../../../../../../api/api-web.nhle/skaterStatsLeadersCurrentGet.ts";
+import { goalieStatsLeadersCurrentGet } from "../../../../../../api/api-web.nhle/goalieStatsLeadersCurrentGet.ts";
 import { LeaderPlayerInfo } from "./LeaderPlayerInfo/LeaderPlayerInfo.tsx";
 import { PlayersListItem } from "./PlayersListItem/PlayersListItem.tsx";
 import styles from './LeaderPlayers.module.css';
@@ -66,10 +66,11 @@ export const LeaderPlayers: FC<Props> = ({skater, goalie}) => {
             } finally {
                 setLoader(false)
             }}
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [])
 
     return (
-        <Card title={<a href='/' className={styles.title}>{skater ? 'Skater' : goalie ? 'Goalie' : ''}</a>} loading={loader}>
+        <Card title={<a href='/public' className={styles.title}>{skater ? 'Skater' : goalie ? 'Goalie' : ''}</a>} loading={loader}>
             <Tabs
                 items={items}
                 onChange={(activeKey) => handleTabChange(activeKey as CurrentTab)}

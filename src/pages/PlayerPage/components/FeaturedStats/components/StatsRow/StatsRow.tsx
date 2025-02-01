@@ -4,7 +4,7 @@ import {FEATURED_STATS} from "../../constants/constants.ts";
 import styles from './StatsRow.module.css'
 
 type Props = {
-    featuredStats: {title: string, stats: [string, string | number][] | undefined};
+    featuredStats: {title: string, stats: (string | number)[][] | undefined};
 }
 
 export const StatsRow:  FC<Props> = ({featuredStats: {title, stats}}) => {

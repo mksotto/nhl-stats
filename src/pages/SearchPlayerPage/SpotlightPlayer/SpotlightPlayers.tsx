@@ -12,11 +12,11 @@ export const SpotlightPlayers: FC<Props> = ({player, onClick}) => {
    
     return (
         <Flex className={styles.playerCard} onClick={onClick}>
-            <img src={player.headshot} className={styles.headshot} /> 
+            <img src={player.headshot} className={styles.headshot} alt='' />
             <Flex vertical justify="center" gap={14}>
                 <div className={styles.name}>{player.name.default}</div>
                 <Flex gap={4}>
-                    <img src={player.teamLogo} className={styles.teamLogo} />
+                    <img src={player.teamLogo} className={styles.teamLogo} alt='' />
                     <div className={styles.description}>{player.teamTriCode}</div>
                     <div className={styles.description}>•</div>
                     <div className={styles.description}>{`#${player.sweaterNumber}`}</div>
