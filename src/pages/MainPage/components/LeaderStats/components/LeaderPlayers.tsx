@@ -1,14 +1,14 @@
 import {FC, useEffect, useState} from "react";
 import { Card, Flex, Tabs, TabsProps } from "antd";
 import { LeaderPlayer } from "../../../../../types/base";
-import {PlayerStatsLeadersCurrentGet} from "../../../../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../../../../types/playerStatsLeadersGet.ts";
 import { skaterStatsLeadersCurrentGet } from "../../../../../api/api-web.nhle/skaterStatsLeadersCurrentGet";
 import { goalieStatsLeadersCurrentGet } from "../../../../../api/api-web.nhle/goalieStatsLeadersCurrentGet.ts";
 import { LeaderPlayerInfo } from "./LeaderPlayerInfo/LeaderPlayerInfo.tsx";
 import { PlayersListItem } from "./PlayersListItem/PlayersListItem.tsx";
 import styles from './LeaderPlayers.module.css';
 
-type CurrentTab = keyof PlayerStatsLeadersCurrentGet
+type CurrentTab = keyof PlayerStatsLeadersGet
 type Props = {
     skater?: boolean,
     goalie?: boolean,
@@ -34,7 +34,7 @@ export const LeaderPlayers: FC<Props> = ({skater, goalie}) => {
 
     const items: TabsProps['items'] = getItems(skater, goalie)
     const [currentTab, setCurrentTab] = useState<CurrentTab>(items[0].key  as CurrentTab)
-    const [players, setPlayers] =  useState<PlayerStatsLeadersCurrentGet>()
+    const [players, setPlayers] =  useState<PlayerStatsLeadersGet>()
     const [player, setPlayer] = useState<LeaderPlayer>()
     const [loader, setLoader] =  useState<boolean>(false) // не работает, надо разобраться
     const [playerId, setPlayerId] = useState(0)

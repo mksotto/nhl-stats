@@ -1,6 +1,6 @@
 import { LeaderPlayer } from "./base";
 
-export interface PlayerStatsLeadersCurrentGet {
+export interface PlayerStatsLeadersGet {
     goalsSh:               LeaderPlayer[];
     plusMinus:             LeaderPlayer[];
     assists:               LeaderPlayer[];

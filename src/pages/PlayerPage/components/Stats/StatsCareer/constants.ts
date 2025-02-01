@@ -25,17 +25,17 @@ export const SKATER_PARAMS: TableProps<SeasonTotal>['columns'] = [
     {
         title: 'G',
         dataIndex: 'goals',
-        render: (goals: number) => (goals ? goals : '-'),
+        render: (goals: number) => (goals ? goals : '0'),
     },
     {
         title: 'A',
         dataIndex: 'assists',
-        render: (assists: number) => (assists ? assists : '-'),
+        render: (assists: number) => (assists ? assists : '0'),
     },
     {
         title: 'P',
         dataIndex: 'points',
-        render: (points: number) => (points ? points : '-'),
+        render: (points: number) => (points ? points : '0'),
     },
     {
         title: '+/-',

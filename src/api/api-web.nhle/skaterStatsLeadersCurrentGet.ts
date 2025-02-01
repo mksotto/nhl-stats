@@ -1,7 +1,7 @@
 import { makeRequest } from './base';
-import {PlayerStatsLeadersCurrentGet} from "../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../types/playerStatsLeadersGet.ts";
 
-export const skaterStatsLeadersCurrentGet = () => makeRequest<PlayerStatsLeadersCurrentGet>({
+export const skaterStatsLeadersCurrentGet = () => makeRequest<PlayerStatsLeadersGet>({
     url: '/skater-stats-leaders/current',
     method: 'GET',
     params: {

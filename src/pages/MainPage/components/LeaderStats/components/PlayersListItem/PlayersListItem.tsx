@@ -3,7 +3,7 @@ import {LeaderPlayer} from "../../../../../../types/base.ts";
 import { Flex } from "antd";
 import styles from './PlayersListItem.module.css'
 import cx from 'classnames'
-import {PlayerStatsLeadersCurrentGet} from "../../../../../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../../../../../types/playerStatsLeadersGet.ts";
 import {curatedPlayer} from "../../utils/cureatedPlayer.ts";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
     keyOfItem: number,
     active: boolean,
     onMouseEnter: React.MouseEventHandler<HTMLElement>,
-    currentTab: keyof PlayerStatsLeadersCurrentGet,
+    currentTab: keyof PlayerStatsLeadersGet,
 }
 
 export const PlayersListItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter, currentTab}) => {

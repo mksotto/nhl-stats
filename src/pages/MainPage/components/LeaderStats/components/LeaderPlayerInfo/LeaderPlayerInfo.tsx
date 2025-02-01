@@ -2,13 +2,13 @@ import {FC} from "react";
 import { useNavigate } from "react-router-dom";
 import { Flex, Image } from "antd";
 import { LeaderPlayer } from "../../../../../../types/base";
-import {PlayerStatsLeadersCurrentGet} from "../../../../../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../../../../../types/playerStatsLeadersGet.ts";
 import styles from './LeaderPlayerInfo.module.css'
 import {curatedPlayer} from "../../utils/cureatedPlayer.ts";
 
 type Props = {
     player: LeaderPlayer;
-    currentTab: keyof PlayerStatsLeadersCurrentGet
+    currentTab: keyof PlayerStatsLeadersGet
 }
 
 const MAP = {

@@ -1,7 +1,7 @@
 import { makeRequest } from "./base";
-import {PlayerStatsLeadersCurrentGet} from "../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../types/playerStatsLeadersGet.ts";
 
-export const goalieStatsLeadersCurrentGet = () => makeRequest<PlayerStatsLeadersCurrentGet>({
+export const goalieStatsLeadersCurrentGet = () => makeRequest<PlayerStatsLeadersGet>({
     url: '/goalie-stats-leaders/current',
     method: 'GET',
     params: {

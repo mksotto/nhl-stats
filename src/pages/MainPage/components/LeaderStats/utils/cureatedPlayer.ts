@@ -1,8 +1,8 @@
 import {LeaderPlayer} from "../../../../../types/base.ts";
-import {PlayerStatsLeadersCurrentGet} from "../../../../../types/playerStatsLeadersCurrentGet.ts";
+import {PlayerStatsLeadersGet} from "../../../../../types/playerStatsLeadersGet.ts";
 
 
-export const curatedPlayer = (player: LeaderPlayer, currentTab: keyof PlayerStatsLeadersCurrentGet) => {
+export const curatedPlayer = (player: LeaderPlayer, currentTab: keyof PlayerStatsLeadersGet) => {
     if (currentTab === 'savePctg') {
         return {
             ...player,
