@@ -49,7 +49,7 @@ export const StatsCareer: FC<Props> = ({player}) => {
                     />
                 </Flex>
             </Flex>
-            <Table columns={columns} dataSource={data} pagination={false} />
+            <Table className={styles.table} columns={columns} dataSource={data} pagination={false} />
         </Flex>
     )
 }

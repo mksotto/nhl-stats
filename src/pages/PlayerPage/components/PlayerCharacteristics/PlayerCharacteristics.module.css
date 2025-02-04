@@ -1,7 +1,32 @@
 .playerCharacteristics {
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
 }
 
 .playerCharacteristicKey {
     font-weight: 700;
+}
+
+@media (max-width: 1220px) {
+    .playerCharacteristics {
+        font-size: 20px;
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .playerCharacteristics {
+        font-size: 18px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 820px) {
+    .playerCharacteristics {
+        font-size: 16px;
+        gap: 4px 8px;
+    }
 }

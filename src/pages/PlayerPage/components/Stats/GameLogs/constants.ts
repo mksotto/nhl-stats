@@ -7,6 +7,7 @@ export const SKATER_PARAMS: TableProps<GameLog>['columns'] = [
         title: 'Date',
         dataIndex: 'gameDate',
         render: (gameDate: string) => dayjs(gameDate).format('DD MMM YYYY'),
+        fixed: 'left',
     },
     {
         title: 'Team',
@@ -86,6 +87,7 @@ export const GOALIE_PARAMS = [
         title: 'Date',
         dataIndex: 'gameDate',
         render: (gameDate: string) => dayjs(gameDate).format('DD MMM YYYY'),
+        fixed: 'left',
     },
     {
         title: 'Team',

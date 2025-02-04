@@ -16,7 +16,8 @@ export const Last5Games: FC<Props> = ({player}) => {
     const columns: TableProps<Last5Game>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
 
     return (
-        <Flex>
+        <Flex vertical>
+            <Flex className={styles.title}>Last 5 Games</Flex>
             <Table<Last5Game> columns={columns} dataSource={data} pagination={false} className={styles.table} />
         </Flex>
     )

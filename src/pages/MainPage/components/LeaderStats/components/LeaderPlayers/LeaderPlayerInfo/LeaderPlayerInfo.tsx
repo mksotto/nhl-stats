@@ -32,7 +32,6 @@ export const LeaderPlayerInfo: FC<Props> = ({player, currentTab}) => {
     const navigate = useNavigate();
 
     const playerModified = curatedPlayer(player, currentTab)
-
     return (
         <Flex gap={8} align="center" className={styles.container}>
             <Flex gap={8} className={styles.skatersInfo}>

@@ -16,3 +16,27 @@
 .selectRoster {
     width: 200px;
 }
+
+@media (max-width: 1024px) {
+    .titlePlayerInfo {
+        font-size: 32px;
+    }
+    .titleTeamLogo {
+        height: 36px;
+    }
+    .titleContainer {
+        padding: 0;
+    }
+}
+
+@media (max-width: 820px) {
+    .titlePlayerInfo {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 730px) {
+    .titleContainer {
+        flex-direction: column;
+    }
+}

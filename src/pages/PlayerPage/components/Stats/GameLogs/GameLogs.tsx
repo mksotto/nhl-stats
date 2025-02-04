@@ -63,7 +63,7 @@ export const GameLogs: FC<Props> = ({playerId, position}) => {
                     />
                 </Flex>
             </Flex>
-            <Table columns={columns} dataSource={data} pagination={false} />
+            <Table className={styles.table} columns={columns} dataSource={data} pagination={false} />
         </Flex>
     )
 }
