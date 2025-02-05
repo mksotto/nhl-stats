@@ -7,7 +7,7 @@ export const SKATER_PARAMS: TableProps<SeasonTotal>['columns'] = [
         title: 'Season',
         dataIndex: 'season',
         render: (season: number) => `${String(season).substring(0, 4)}-${String(season).substring(6)}`,
-        fixed: 'left',
+        fixed: 'left'  as const,
     },
     {
         title: 'League',
@@ -113,7 +113,7 @@ export const GOALIE_PARAMS: TableProps<SeasonTotal>['columns'] = [
         title: 'Season',
         dataIndex: 'season',
         render: (season: number) => `${String(season).substring(0, 4)}-${String(season).substring(6)}`,
-        fixed: 'left',
+        fixed: 'left'  as const,
     },
     {
         title: 'League',

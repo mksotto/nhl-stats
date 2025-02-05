@@ -2,6 +2,7 @@
     font-size: 28px;
     font-weight: 700;
     line-height: 40px;
+    flex-shrink: 0;
 }
 
 .select {
@@ -9,5 +10,5 @@
 }
 
 .table {
-    overflow: scroll;
+    overflow: auto;
 }

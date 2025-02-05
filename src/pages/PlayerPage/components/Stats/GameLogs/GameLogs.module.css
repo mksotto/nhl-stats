@@ -9,5 +9,5 @@
 }
 
 .table {
-    overflow: scroll;
+    overflow: auto;
 }

@@ -25,7 +25,7 @@ export const Stats: FC<Props> = ({player, playerId}) => {
     ]
 
     return (
-        <Flex vertical align="center">
+        <Flex className={styles.container}>
             <Flex className={styles.title}>STATS</Flex>
             <Tabs
                 defaultActiveKey='career'
