@@ -55,7 +55,7 @@
     }
 }
 
-@media (max-width: 730px) {
+@media (max-width: 768px) {
     .layout {
         border-radius: 20px;
     }

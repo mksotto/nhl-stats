@@ -3,6 +3,7 @@ import { FC, useState } from "react";
 import { PlayerPlayerIdLandingGet, SeasonTotal } from "../../../../../types/playerPlayerIdLandingGet";
 import { SKATER_PARAMS, GOALIE_PARAMS } from "./constants";
 import styles from './StatsCareer.module.css'
+import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
 
 type Props = {
     player: PlayerPlayerIdLandingGet
@@ -22,17 +23,20 @@ export const StatsCareer: FC<Props> = ({player}) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [gameTypeId, setGameTypeId] = useState(2)
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const isMobile = useIsMobile()
+
     const data = filteredStats(player.seasonTotals, statsLeague, gameTypeId)
 
     const columns: TableProps<SeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
 
     return (
         <Flex vertical gap={16}>
-            <Flex justify="space-between" style={{width: '100%'}}>
-                <Typography.Text className={styles.title}>
+            <Flex className={styles.container}>
+                {!isMobile && <Typography.Text className={styles.title}>
                     Career Stats
-                </Typography.Text>
-                <Flex gap={8}>
+                </Typography.Text>}
+                <Flex className={styles.selectContainer}>
                     <Select
                         options={[{label: 'NHL', value: 'nhl'}, {label: 'All Leagues', value: 'all'}]}
                         value={statsLeague}

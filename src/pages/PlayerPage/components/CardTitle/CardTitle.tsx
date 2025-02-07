@@ -17,6 +17,8 @@ export const CardTitle: FC<Props> = ({player, playerId}) => {
         value: otherPlayer?.playerId
     }));
 
+    const isLarge = useIsLarge()
+
     return (
         <Flex justify="space-between">
             <Flex className={styles.titleContainer}>
@@ -27,7 +29,7 @@ export const CardTitle: FC<Props> = ({player, playerId}) => {
                     <div className={styles.titlePlayerInfo}>{`${player?.position}`}</div>
                 </Flex>
             </Flex>
-            {useIsLarge() && player?.isActive && (
+            {isLarge && player?.isActive && (
                 <Flex className={styles.titleContainer}>
                     <div>ROSTER</div>
                     <Select

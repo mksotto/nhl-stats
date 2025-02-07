@@ -21,3 +21,10 @@
         padding: 0;
     }
 }
+
+@media (max-width: 768px) {
+    .statsContainer {
+        padding: 0;
+        align-items: center;
+    }
+}

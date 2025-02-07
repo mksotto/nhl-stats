@@ -5,6 +5,7 @@ import { usePlayerPlayerIdGameLogNow } from "../../../../../queries/usePlayerPla
 import { usePlayerPlayerIdGameLogSeasonGameType } from "../../../../../queries/usePlayerPlayerIdGameLogSeasonGameType";
 import { GameLog } from "../../../../../types/playerPlayerIdGameLogGet";
 import { GOALIE_PARAMS, SKATER_PARAMS } from "./constants";
+import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
 
 type Props = {
     playerId: number,
@@ -19,6 +20,8 @@ export const GameLogs: FC<Props> = ({playerId, position}) => {
     
     const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(playerId)
     const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(playerId, season, gameTypeId)
+
+    const isMobile = useIsMobile()
 
     useEffect(() => {
         setSeason(gameLogNow?.seasonId)
@@ -39,11 +42,11 @@ export const GameLogs: FC<Props> = ({playerId, position}) => {
 
     return (
         <Flex vertical gap={16}>
-            <Flex justify="space-between" style={{width: '100%'}}>
-                <Typography.Text className={styles.title}>
-                    Career Stats
-                </Typography.Text>
-                <Flex gap={8}>
+            <Flex className={styles.container}>
+                {!isMobile && <Typography.Text className={styles.title}>
+                    Game Logs
+                </Typography.Text>}
+                <Flex className={styles.selectContainer}>
                     <Select
                         options={gameLogNow?.playerStatsSeasons?.map((season) => ({
                             label: `${String(season.season).substring(0, 4)}-${String(season.season).substring(6)}`,

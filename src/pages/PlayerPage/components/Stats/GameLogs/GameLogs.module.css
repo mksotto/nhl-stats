@@ -1,7 +1,19 @@
+.container {
+    width: 100%;
+    justify-content: space-between;
+}
+
 .title {
     font-size: 28px;
     font-weight: 700;
     line-height: 40px;
+    flex-shrink: 0;
+}
+
+.selectContainer {
+    width: 100%;
+    justify-content: end;
+    gap: 8px;
 }
 
 .select {
@@ -10,4 +22,10 @@
 
 .table {
     overflow: auto;
+}
+
+@media (max-width: 768px) {
+    .select {
+        max-width: 200px;
+    }
 }

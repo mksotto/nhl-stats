@@ -35,8 +35,11 @@
     }
 }
 
-@media (max-width: 730px) {
+@media (max-width: 768px) {
     .titleContainer {
         flex-direction: column;
+    }
+    .titlePlayerInfo {
+        font-size: 30px;
     }
 }
