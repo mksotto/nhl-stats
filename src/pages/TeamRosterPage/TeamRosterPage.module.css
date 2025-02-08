@@ -1,0 +1,7 @@
+.layout {
+    max-width: 1440px;
+    width: 100%;
+    border-radius: 30px;
+    margin-top: 40px;
+    overflow: hidden;
+}

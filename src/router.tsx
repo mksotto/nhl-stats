@@ -4,6 +4,7 @@ import { FC } from "react";
 import { MainPage } from "./pages/MainPage/MainPage.tsx";
 import {SearchPlayerPage} from './pages/SearchPlayerPage/SearchPlayerPage.tsx'
 import { PlayerPage } from "./pages/PlayerPage/PlayerPage.tsx";
+import {TeamRosterPage} from "./pages/TeamRosterPage/TeamRosterPage.tsx";
 
 const path = (path: string, Page: FC): RouteObject => ({
     path,
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
             path('/', MainPage),
             path('/player', SearchPlayerPage),
             path('/player/:playerId', PlayerPage),
+            path('/team/:teamAbbrev', TeamRosterPage)
         ]
     }
 ]);
