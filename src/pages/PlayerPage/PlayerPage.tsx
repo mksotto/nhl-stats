@@ -1,4 +1,4 @@
-import { Card, Flex } from "antd";
+import {Card, Flex, Spin} from "antd";
 import { FC } from "react";
 import styles from './PlayerPage.module.css'
 import { useParams } from "react-router-dom";
@@ -10,6 +10,7 @@ import { Stats } from "./components/Stats/Stats";
 import { Description } from "./components/Description/Description";
 import { usePlayerPlayerIdLanding } from "../../queries/usePlayerPlayerIdLanding";
 import {useIsExtraLarge, useIsLarge, useIsMobile} from "../../hooks/mediaCheckers.ts";
+import {LoadingOutlined} from "@ant-design/icons";
 
 
 export const PlayerPage: FC = () => {
@@ -34,15 +35,16 @@ export const PlayerPage: FC = () => {
                                     <PlayerCharacteristics player={player}/>
                                 </Flex>
                             </Flex>
-                            {isExtraLarge && player && <FeaturedStats player={player}/>}
+                            {isExtraLarge && player ? <FeaturedStats player={player}/> :
+                                <Spin indicator={<LoadingOutlined spin/>} size="large"/>}
                         </Flex> : ' '}
                     </Flex>
                     {isMobile && <img src={player?.headshot} className={styles.headShot}/>}
                     {isMobile && <CardTitle player={player}/>}
-                    {!isExtraLarge && player && <FeaturedStats player={player} />}
-                    {player && <Last5Games player={player} />}
-                    {player && <Stats player={player} playerId={playerId} />}
-                    <Description playerId={playerId} />
+                    {!isExtraLarge && player && <FeaturedStats player={player}/>}
+                    {player && <Last5Games player={player}/>}
+                    {player && <Stats player={player} playerId={playerId}/>}
+                    <Description playerId={playerId}/>
                 </Flex>
             </Card>
         </Flex>

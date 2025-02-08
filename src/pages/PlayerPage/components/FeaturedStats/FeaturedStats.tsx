@@ -4,6 +4,7 @@ import styles from './FeaturedStats.module.css'
 import {Carousel, Flex} from "antd";
 import {StatsRow} from "./components/StatsRow/StatsRow.tsx";
 import {curateFeaturedStats} from "./utils/сurateFeaturesStats.ts";
+import {useIsMobile} from "../../../../hooks/mediaCheckers.ts";
 
 type Props = {
     player: PlayerPlayerIdLandingGet
@@ -16,10 +17,12 @@ export const FeaturedStats: FC<Props> = ({player}) => {
     const featuredStatsRegularCareer = curateFeaturedStats(player, 'regularSeason', 'career');
     const featuredStatsPlayoffCareer = curateFeaturedStats(player, 'playoffs', 'career');
 
+    const isMobile = useIsMobile()
+
     return(
         <Carousel
             rootClassName={styles.arrow}
-            arrows
+            arrows={!isMobile}
             infinite={false}
             dots={false}
         >

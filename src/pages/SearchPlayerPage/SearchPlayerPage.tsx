@@ -35,7 +35,7 @@ export const SearchPlayerPage: FC = () => {
     return (
         <Flex justify="center">
             <Card className={styles.layout}>
-                <Input.Search 
+                <Input
                     className={styles.inputPlayer}
                     size="large"
                     value={searchPlayer}
