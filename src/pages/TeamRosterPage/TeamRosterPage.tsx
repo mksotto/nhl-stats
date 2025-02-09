@@ -26,16 +26,18 @@ export const TeamRosterPage: FC = () => {
     if (!teamAbbrev || !seasons || !season) return;
 
     return (
-        <Card title={<TeamRosterTitle seasons={seasons} season={season} setSeason={setSeason}/>} className={styles.layout}>
-            <Flex vertical gap={32}>
-                {roster &&
-                    <>
-                        <RosterItem title='Forwards' players={roster.forwards}/>
-                        <RosterItem title='Defensemen' players={roster.defensemen}/>
-                        <RosterItem title='Goalies' players={roster.goalies}/>
-                    </>
-                }
-            </Flex>
-        </Card>
+        <Flex justify='center'>
+            <Card title={<TeamRosterTitle seasons={seasons} season={season} setSeason={setSeason}/>} className={styles.layout}>
+                <Flex vertical gap={32}>
+                    {roster &&
+                        <>
+                            <RosterItem title='Forwards' players={roster.forwards}/>
+                            <RosterItem title='Defensemen' players={roster.defensemen}/>
+                            <RosterItem title='Goalies' players={roster.goalies}/>
+                        </>
+                    }
+                </Flex>
+            </Card>
+        </Flex>
     );
 }
