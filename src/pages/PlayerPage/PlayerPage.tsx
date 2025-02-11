@@ -11,12 +11,14 @@ import { Description } from "./components/Description/Description";
 import { usePlayerPlayerIdLanding } from "../../queries/usePlayerPlayerIdLanding";
 import {useIsExtraLarge, useIsLarge, useIsMobile} from "../../hooks/mediaCheckers.ts";
 import {LoadingOutlined} from "@ant-design/icons";
+import {useContentEnUsPlayers} from "../../queries/useContentEnUsPlayers.ts";
 
 
 export const PlayerPage: FC = () => {
     
     const playerId = Number(useParams().playerId);
     const {data: player} = usePlayerPlayerIdLanding(playerId);
+    const {data: description} = useContentEnUsPlayers(playerId);
 
     const isMobile = useIsMobile()
     const isLarge =  useIsLarge();
@@ -44,7 +46,7 @@ export const PlayerPage: FC = () => {
                     {!isExtraLarge && player && <FeaturedStats player={player}/>}
                     {player && <Last5Games player={player}/>}
                     {player && <Stats player={player} playerId={playerId}/>}
-                    <Description playerId={playerId}/>
+                    {description?.items[0] && <Description description={description}/>}
                 </Flex>
             </Card>
         </Flex>

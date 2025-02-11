@@ -16,11 +16,11 @@ export const PLAYER_PARAMS: Exclude<TableProps<Player>['columns'], undefined>  =
         dataIndex: 'shootsCatches',
     },
     {
-        title: 'Height',
+        title: 'Height (cm)',
         dataIndex: 'heightInCentimeters',
     },
     {
-        title: 'Weight',
+        title: 'Weight (kg)',
         dataIndex: 'weightInKilograms',
     },
     {

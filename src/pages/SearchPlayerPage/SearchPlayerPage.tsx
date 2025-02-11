@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { playerSpotlightGet } from "../../api/api-web.nhle/playerSpotlightGet";
 import { PlayerSpotlightGet } from "../../types/playerSpotlightGet";
-import { Card, Flex, Input } from "antd";
+import {Card, Checkbox, Flex, Input} from "antd";
 import { SpotlightPlayers } from "./SpotlightPlayer/SpotlightPlayers";
 import { useNavigate } from "react-router-dom";
 import styles from './SearchPlayerPage.module.css'
@@ -11,18 +11,20 @@ import { SearchResult } from "./SearchResult/SearchResult";
 
 export const SearchPlayerPage: FC = () => {
     const navigate = useNavigate();
-    const [spotlightPlayer, setSpotlightPlayer] = useState<PlayerSpotlightGet[]>()
+    const [spotlightPlayer, setSpotlightPlayer] = useState<PlayerSpotlightGet[]>();
+    const [active, setActive] = useState<boolean>(true)
     useEffect(() => {
         try {
-            playerSpotlightGet().then(r => setSpotlightPlayer( [...r].sort((a, b) => {
-                if (a.sortId < b.sortId) {
-                    return -1;
-                }
-                if (a.sortId > b.sortId) {
-                    return 1;
-                }
-                return 0;
-            })))
+            playerSpotlightGet()
+                .then(r => setSpotlightPlayer( [...r].sort((a, b) => {
+                    if (a.sortId < b.sortId) {
+                        return -1;
+                    }
+                    if (a.sortId > b.sortId) {
+                        return 1;
+                    }
+                    return 0;
+                })))
         } catch (e) {
             console.error(e)
         }
@@ -30,8 +32,8 @@ export const SearchPlayerPage: FC = () => {
     const [searchPlayer, setSearchPlayer] = useState<string>('');
     const debounceSearch = useDebounce(searchPlayer, 500);
 
-    const {data: players} = useSearchPlayer(debounceSearch)
-    
+    const {data: players} = useSearchPlayer(debounceSearch, active);
+
     return (
         <Flex justify="center">
             <Card className={styles.layout}>
@@ -40,6 +42,7 @@ export const SearchPlayerPage: FC = () => {
                     size="large"
                     value={searchPlayer}
                     onChange={(e) => setSearchPlayer(e.target.value)}
+                    suffix={<Checkbox checked={active} onChange={(e) => setActive(e.target.checked)}>Active</Checkbox>}
                 />
                 <div className={styles.playersCard}>
                     {(players 

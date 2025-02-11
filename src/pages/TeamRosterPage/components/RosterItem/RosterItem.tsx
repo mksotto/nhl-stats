@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Flex, Table, TableProps, Image} from "antd";
+import {Flex, Table, TableProps} from "antd";
 import {Player} from "../../../../types/rosterTeamSeason.ts";
 import styles from './RosterItem.module.css'
 import {PLAYER_PARAMS} from "./constants.tsx";
@@ -22,11 +22,20 @@ export const RosterItem: FC<Props> = ({title, players}) => {
             key: 'player',
             render: (_, player) => (
                 <Flex align='center' gap={16}>
-                    <Image src={player.headshot}  style={{ borderRadius: '50%', width: 50, height: 50 }} />
-                    <div onClick={() => {navigate(`/player/${player.id}`)}} style={{fontSize: 16, fontWeight: 600}}>
+                    <img
+                        src={player.headshot}
+                        alt={player.firstName.default + player.lastName.default}
+                        className={styles.image}
+                    />
+                    <div
+                        onClick={() => {navigate(`/player/${player.id}`)}}
+                        className={styles.name}
+                        style={{fontSize: 16, fontWeight: 600}}
+                    >
                         {player.firstName.default} {player.lastName.default}
                     </div>
                 </Flex>),
+            fixed: 'left',
         },
         ...PLAYER_PARAMS,
     ];
@@ -34,7 +43,7 @@ export const RosterItem: FC<Props> = ({title, players}) => {
     return (
         <div>
             <div className={styles.title}>{title}</div>
-            <Table dataSource={players} columns={columns} pagination={false}/>
+            <Table dataSource={players} columns={columns} pagination={false} className={styles.table}/>
         </div>
     );
 };
