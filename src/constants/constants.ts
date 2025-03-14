@@ -1,5 +1,7 @@
 export const BASE_URL = '/';
 
+export const NHL_STATS_API_URL = 'http://localhost:8080'
+
 export const NHL_API_URL = 'https://api-web.nhle.com/v1';
 
 export const SEARCH_API_URL = 'https://search.d3.nhle.com/api/v1';

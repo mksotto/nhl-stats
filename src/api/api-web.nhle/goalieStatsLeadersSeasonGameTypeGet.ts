@@ -7,4 +7,4 @@ export const goalieStatsLeadersSeasonGameTypeGet = (season: number, gameType: nu
     params: {
         limit: 10,
     }
-})
+});
