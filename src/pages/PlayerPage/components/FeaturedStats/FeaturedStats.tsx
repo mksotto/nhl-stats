@@ -1,24 +1,16 @@
 import { FC } from "react";
-import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
 import styles from './FeaturedStats.module.css'
 import {Carousel, Flex} from "antd";
 import {StatsRow} from "./components/StatsRow/StatsRow.tsx";
-import {curateFeaturedStats} from "./utils/сurateFeaturesStats.ts";
 import {useIsMobile} from "../../../../hooks/mediaCheckers.ts";
+import {PlayerAdvanced} from "../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    player: PlayerPlayerIdLandingGet
+    player: PlayerAdvanced
 }
 
 export const FeaturedStats: FC<Props> = ({player}) => {
-
-    const featuredStatsRegularSeason = curateFeaturedStats(player, 'regularSeason', 'subSeason');
-    const featuredStatsPlayoffSeason = curateFeaturedStats(player, 'playoffs', 'subSeason');
-    const featuredStatsRegularCareer = curateFeaturedStats(player, 'regularSeason', 'career');
-    const featuredStatsPlayoffCareer = curateFeaturedStats(player, 'playoffs', 'career');
-
-    const isMobile = useIsMobile()
-
+    const isMobile = useIsMobile();
     return(
         <Carousel
             rootClassName={styles.arrow}
@@ -26,18 +18,18 @@ export const FeaturedStats: FC<Props> = ({player}) => {
             infinite={false}
             dots={false}
         >
-            {featuredStatsRegularSeason.stats && featuredStatsRegularCareer.stats &&(
-                <Flex className={styles.statsContainer} gap={16}>
-                    <StatsRow featuredStats={featuredStatsRegularSeason} />
-                    <StatsRow featuredStats={featuredStatsRegularCareer} />
+            {player.lastSeasonStats?.season && (
+                <Flex className={styles.statsContainer}>
+                    <StatsRow title={`${player.lastSeasonStats?.season} season`} stats={player.lastSeasonStats?.regular} />
+                    <StatsRow title='Career' stats={player.careerStats?.regular} />
                 </Flex>
             )}
-            {featuredStatsPlayoffSeason.stats && featuredStatsPlayoffCareer.stats &&(
+            {player.lastSeasonStats?.playoff && (
                 <Flex className={styles.statsContainer}>
-                    <StatsRow featuredStats={featuredStatsPlayoffSeason} />
-                    <StatsRow featuredStats={featuredStatsPlayoffCareer} />
+                    <StatsRow title={`${player.lastSeasonStats?.season} playoff`} stats={player.lastSeasonStats?.playoff} />
+                    <StatsRow title='Career playoffs' stats={player.careerStats?.playoff} />
                 </Flex>
             )}
         </Carousel>
-    )
-}
+    );
+};

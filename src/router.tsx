@@ -16,9 +16,9 @@ export const router = createBrowserRouter([
         element: <LayoutWrapper />,
         children: [
             path('/', MainPage),
-            path('/player', SearchPlayerPage),
-            path('/player/:playerId', PlayerPage),
-            path('/team/:teamAbbrev', TeamRosterPage)
+            path('/players', SearchPlayerPage),
+            path('/players/:id', PlayerPage),
+            path('/teams/:teamAbbrev', TeamRosterPage)
         ]
     }
 ]);

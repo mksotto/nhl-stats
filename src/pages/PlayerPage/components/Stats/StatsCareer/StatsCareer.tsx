@@ -1,34 +1,31 @@
 import { Flex, Select, Table, TableProps, Typography } from "antd";
 import { FC, useState } from "react";
-import { PlayerPlayerIdLandingGet, SeasonTotal } from "../../../../../types/playerPlayerIdLandingGet";
-import { SKATER_PARAMS, GOALIE_PARAMS } from "./constants";
+import {SKATER_PARAMS, GOALIE_PARAMS, GAME_TYPE_ID_OPTIONS, LEAGUE_OPTIONS} from "./constants";
 import styles from './StatsCareer.module.css'
 import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
+import {PlayerAdvanced, PlayerSeasonTotal} from "../../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    player: PlayerPlayerIdLandingGet
-}
+    player: PlayerAdvanced;
+};
 
-const filteredStats = (seasonTotals: SeasonTotal[], statsLeague: string, gameTypeId: number) => {
-    const filterByLeague = statsLeague === 'nhl' ? seasonTotals.filter((season) => season.leagueAbbrev === 'NHL') : seasonTotals;
-    return filterByLeague.filter((season) => season.gameTypeId === gameTypeId);
-}
+const filteredStats = (seasonTotals: PlayerSeasonTotal[], statsLeague: string, gameTypeId: number) => (
+    (statsLeague === 'nhl' ? seasonTotals.filter((season) => season?.leagueAbbrev === 'NHL') : seasonTotals)
+        .filter((season) => season?.gameTypeId === gameTypeId)
+);
 
 export const StatsCareer: FC<Props> = ({player}) => {
 
-    if(!player.seasonTotals) return null;
+    if(!player.seasonTotal) return null;
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [statsLeague, setStatsLeague] = useState('nhl')
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [gameTypeId, setGameTypeId] = useState(2)
+    const [league, setLeague] = useState(LEAGUE_OPTIONS[0].value);
+    const [gameTypeId, setGameTypeId] = useState(GAME_TYPE_ID_OPTIONS[0].value);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isMobile = useIsMobile()
+    const isMobile = useIsMobile();
 
-    const data = filteredStats(player.seasonTotals, statsLeague, gameTypeId)
+    const data = filteredStats(player.seasonTotal, league, gameTypeId)
 
-    const columns: TableProps<SeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
+    const columns: TableProps<PlayerSeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
 
     return (
         <Flex vertical gap={16}>
@@ -38,14 +35,14 @@ export const StatsCareer: FC<Props> = ({player}) => {
                 </Typography.Text>}
                 <Flex className={styles.selectContainer}>
                     <Select
-                        options={[{label: 'NHL', value: 'nhl'}, {label: 'All Leagues', value: 'all'}]}
-                        value={statsLeague}
-                        onChange={(v) => setStatsLeague(v)}
+                        options={LEAGUE_OPTIONS}
+                        value={league}
+                        onChange={(v) => setLeague(v)}
                         size='large'
                         className={styles.select}
                     />
                     <Select 
-                        options={[{label: 'Regular Season', value: 2}, {label: 'Playoffs', value: 3}]}
+                        options={GAME_TYPE_ID_OPTIONS}
                         value={gameTypeId}
                         onChange={(v) => setGameTypeId(v)}
                         size='large'

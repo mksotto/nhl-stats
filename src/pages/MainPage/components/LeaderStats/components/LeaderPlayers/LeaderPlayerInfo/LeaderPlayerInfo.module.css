@@ -8,6 +8,10 @@
     border-radius: 0 0 50% 50%;
 }
 
+.container {
+    cursor: pointer;
+}
+
 .skaterName {
     font-weight: 700;
 }

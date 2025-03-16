@@ -1,38 +1,39 @@
 import { FC } from "react";
-import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
 import {Flex} from "antd";
 import dayjs from "dayjs";
 import styles from './PlayerCharacteristics.module.css';
+import {PlayerInfo} from "../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    player: PlayerPlayerIdLandingGet | undefined,
+    info: PlayerInfo | undefined,
+    isActive: boolean | undefined,
 }
 
-export const PlayerCharacteristics: FC<Props> = ({player}) => (
-    <div className={styles.playerCharacteristics}>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Height:</div>
-            <div>{`${player?.heightInCentimeters} cm`}</div>
-        </Flex>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Weight:</div>
-            <div>{`${player?.weightInKilograms} kg`}</div>
-        </Flex>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Birthdate:</div>
-            <div>{`${(player?.birthDate ? dayjs(player?.birthDate).format('DD MMMM YYYY') : '')}`} (Age:&nbsp;{`${(player?.birthDate ? new Date(Date.now() - Date.parse(player?.birthDate)).getFullYear() - 1970 : '')}`})</div>
-        </Flex>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Birthplace:</div>
-            <div>{`${player?.birthCity?.default}, ` + (player?.birthStateProvince ? `${player?.birthStateProvince.default}, ` : '') + `${player?.birthCountry}`}</div>
-        </Flex>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Catches:</div>
-            <div>{`${player?.shootsCatches}`}</div>
-        </Flex>
-        <Flex gap={8}>
-            <div className={styles.playerCharacteristicKey}>Draft:</div>
-            <div>{(player?.draftDetails ? `${player?.draftDetails?.year}, ${player?.draftDetails?.teamAbbrev} (${player?.draftDetails?.overallPick} overall), ${player?.draftDetails?.round} round, ${player?.draftDetails?.pickInRound} pick` : 'Undrafted')}</div>
-        </Flex>
-    </div>
-)
+export const PlayerCharacteristics: FC<Props> = ({info, isActive}) => {
+    const playerInfo = {
+        Height: `${info?.height} cm`,
+        Weight: `${info?.weight} kg`,
+        Birthdate: (info?.birth && `${dayjs(info.birth.date).format('DD MMMM YYYY')} ${(isActive ? `(Age: \u00A0${dayjs().diff(info.birth.date, 'year')})` : '')}`),
+        Birthplace: `${info?.birth.city}, ` + (info?.birth.province ? `${info.birth.province}, ` : '') + `${info?.birth.country}`,
+        Catches: info?.shootsCatches,
+        Draft: (info?.draftDetails
+        ? `
+            ${info.draftDetails.year}, 
+            ${info.draftDetails.teamAbbrev} 
+            (${info.draftDetails.overallPick} overall), 
+            ${info.draftDetails.round} round, 
+            ${info.draftDetails.pickInRound} pick
+        `
+        : 'Undrafted'),
+    };
+    return (
+        <div className={styles.playerCharacteristics}>
+            {Object.entries(playerInfo).map(([key, value], id) => (
+                <Flex gap={8} key={id}>
+                    <div className={styles.playerCharacteristicKey}>{key}:</div>
+                    <div>{value}</div>
+                </Flex>
+            ))}
+        </div>
+    );
+};

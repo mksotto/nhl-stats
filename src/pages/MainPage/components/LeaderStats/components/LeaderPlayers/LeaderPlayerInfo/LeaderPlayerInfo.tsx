@@ -27,7 +27,7 @@ export const LeaderPlayerInfo: FC<Props> = ({player, currentTab}) => {
                 <Flex
                     vertical
                     className={styles.skaterDescription}
-                    onClick={() => {navigate(`/player/${player.id}`)}}
+                    onClick={() => navigate(`/players/${player.id}`)}
                 >
                     <Flex className={styles.skaterNames}>
                         <div className={styles.skaterName}>{player.name}</div>

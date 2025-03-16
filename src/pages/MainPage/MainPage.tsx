@@ -9,12 +9,12 @@ const getPage = (currentTab: string) => {
             return (<LeaderStats />);
         case 'search':
             return (<SearchPlayerPage />);
-        case 'skaters':
-            return (<div>dasda</div>);
-        case 'goalie':
-            return (<div>dasda</div>);
-        case 'teams':
-            return (<div>dssssssssss</div>);
+        // case 'skaters':
+        //     return (<div></div>);
+        // case 'goalie':
+        //     return (<div></div>);
+        // case 'teams':
+        //     return (<div></div>);
     }
 }
 

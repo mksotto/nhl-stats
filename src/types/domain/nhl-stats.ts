@@ -52,8 +52,13 @@ export type PlayerAdvanced = Player & {
   seasonTotal: PlayerSeasonTotal[] | null;
   awards: PlayerAwards[] | null;
   currentTeamRoster: PlayerCurrentTeammate[] | null;
-  description: string | null;
+  description: PlayerDescription | null;
 };
+
+export interface PlayerDescription {
+  title: string;
+  biography: string;
+}
 
 export interface PlayerInfo {
   /** @example 183 */

@@ -2,15 +2,15 @@ import { Flex, Tabs } from "antd";
 import { FC } from "react";
 import styles from './Stats.module.css';
 import { StatsCareer } from "./StatsCareer/StatsCareer";
-import { PlayerPlayerIdLandingGet } from "../../../../types/playerPlayerIdLandingGet";
 import { GameLogs } from "./GameLogs/GameLogs";
+import {PlayerAdvanced} from "../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    player: PlayerPlayerIdLandingGet,
-    playerId: number,
+    player: PlayerAdvanced,
+    id: number,
 }
 
-export const Stats: FC<Props> = ({player, playerId}) => {
+export const Stats: FC<Props> = ({player, id}) => {
     const options = [
         {
             label: 'Career',
@@ -20,7 +20,7 @@ export const Stats: FC<Props> = ({player, playerId}) => {
         {
             label: 'Game Logs',
             key: 'gameLogs',
-            children: <GameLogs playerId={playerId} position={player.position} />,
+            children: <GameLogs id={id} position={player.position} />,
         }
     ]
 

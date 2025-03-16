@@ -3,18 +3,16 @@ import {Flex, Typography} from "antd";
 import {FEATURED_STATS} from "../../constants/constants.ts";
 import styles from './StatsRow.module.css'
 import {useIsMobile} from "../../../../../../hooks/mediaCheckers.ts";
+import {PlayerStatsBySeason} from "../../../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    featuredStats: {title: string, stats: (string | number)[][] | undefined};
-}
+    title: string;
+    stats: PlayerStatsBySeason | undefined;
+};
 
-export const StatsRow:  FC<Props> = ({featuredStats: {title, stats}}) => {
-
-    if (!stats) return
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isMobile = useIsMobile()
-
+export const StatsRow: FC<Props> = ({title, stats}) => {
+    if (!stats) return;
+    const isMobile = useIsMobile();
     return (
         <>
             {isMobile && <Flex  className={styles.tableTitle}>
@@ -25,7 +23,7 @@ export const StatsRow:  FC<Props> = ({featuredStats: {title, stats}}) => {
                     <Typography.Text className={styles.title}>{title}</Typography.Text>
                 </Flex>}
                 <Flex className={styles.featuredStats}>
-                    {stats.map(([key, value]) => (
+                    {Object.entries(stats).map(([key, value]) => (
                         <Flex className={styles.featuredStatsItem}>
                             <Typography.Text type='secondary'>{FEATURED_STATS[key]}</Typography.Text>
                             <Typography.Text className={styles.featuredStatsValue}>{value}</Typography.Text>

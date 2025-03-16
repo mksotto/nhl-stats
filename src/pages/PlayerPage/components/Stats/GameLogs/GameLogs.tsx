@@ -8,18 +8,18 @@ import { GOALIE_PARAMS, SKATER_PARAMS } from "./constants";
 import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
 
 type Props = {
-    playerId: number,
+    id: number,
     position: string,
 }
 
-export const GameLogs: FC<Props> = ({playerId, position}) => {
+export const GameLogs: FC<Props> = ({id, position}) => {
 
     const [season, setSeason] = useState<number>();
     const [gameTypeId, setGameTypeId] = useState<number>(2);
     const [tableData, setTableData] = useState<GameLog[]>()
     
-    const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(playerId)
-    const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(playerId, season, gameTypeId)
+    const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(id)
+    const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(id, season, gameTypeId)
 
     const isMobile = useIsMobile()
 

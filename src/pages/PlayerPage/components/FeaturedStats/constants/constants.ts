@@ -6,14 +6,6 @@ export const FEATURED_STATS: Record<string, string> = {
     'plusMinus': '+/-',
     'wins': 'W',
     'shutouts': 'SO',
-    'goalsAgainstAvg': 'GAA',
+    'goalsAgainstAverage': 'GAA',
     'savePctg': 'SV%',
 };
-
-export const FEATURED_STATS_PLAYER = [
-    'gamesPlayed', 'goals', 'assists', 'points', 'plusMinus',
-] as const;
-
-export const FEATURED_STATS_GOALIES = [
-    'gamesPlayed', 'wins', 'shutouts', 'goalsAgainstAvg', 'savePctg',
-] as const;
