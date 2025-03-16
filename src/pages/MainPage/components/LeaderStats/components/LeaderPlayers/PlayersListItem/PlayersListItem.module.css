@@ -1,19 +1,19 @@
 .skatersTable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    border-radius: 8px;
-    border: 1px solid #E0E0E0;
     height: 28px;
+    gap: 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 7px 12px;
 }
 
 .skatersTableActive {
     background-color: #0055E9;
     border: 1px solid #0055E9;
     color: white;
-}
-
-.padding {
-    width: 100%;
-    padding: 7px 12px;
 }
 
 .index {

@@ -1,34 +1,24 @@
-import React, {FC} from "react";
-import {LeaderPlayer} from "../../../../../../../types/base.ts";
-import { Flex } from "antd";
+import {FC} from "react";
 import styles from './PlayersListItem.module.css'
 import cx from 'classnames'
-import {PlayerStatsLeadersGet} from "../../../../../../../types/playerStatsLeadersGet.ts";
-import {curatedPlayer} from "../../../utils/cureatedPlayer.ts";
+import {Leader} from "../../../../../../../types/domain/nhl-stats.ts";
 
 type Props = {
-    player: LeaderPlayer,
+    player: Leader,
     keyOfItem: number,
     active: boolean,
-    onMouseEnter: React.MouseEventHandler<HTMLElement>,
-    currentTab: keyof PlayerStatsLeadersGet,
-}
+    onMouseEnter: () => void,
+};
 
-export const PlayersListItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter, currentTab}) => {
-
-    const playerModified = curatedPlayer(player, currentTab)
-
-    return (
-        <Flex onMouseEnter={onMouseEnter} className={cx(styles.skatersTable, {
-                [styles.skatersTableActive]: active
-            })}>
-            <Flex gap={8} justify="space-between" align="center" className={styles.padding}>
-                <div className={styles.index}>{`${keyOfItem}.`}</div>
-                <div className={styles.name}>
-                    {playerModified.firstName.default} {playerModified.lastName.default}
-                </div>
-                <div className={styles.value}>{playerModified.value}</div>{/*проверить как работает округление значений*/}
-            </Flex>
-        </Flex>
-    )
-}
+export const PlayersListItem: FC<Props> = ({player, keyOfItem, active, onMouseEnter}) => (
+    <div
+        onMouseEnter={onMouseEnter}
+        className={cx(styles.skatersTable, {
+            [styles.skatersTableActive]: active
+        })}
+    >
+        <div className={styles.index}>{`${keyOfItem}.`}</div>
+        <div className={styles.name}>{player.name}</div>
+        <div className={styles.value}>{player.value}</div>
+    </div>
+);
