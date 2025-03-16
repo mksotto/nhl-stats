@@ -42,11 +42,11 @@ export type PlayerAdvanced = Player & {
   emblems: PlayerEmblem[] | null;
   heroImage: string;
   lastSeasonStats:
-      | ({
-    /** @example "2024-25" */
-    season: string;
-  } & PlayerFeaturedStats)
-      | null;
+    | ({
+        /** @example "2024-25" */
+        season: string;
+      } & PlayerFeaturedStats)
+    | null;
   careerStats: PlayerFeaturedStats;
   last5Games: PlayerLast5Games[] | null;
   seasonTotal: PlayerSeasonTotal[] | null;
