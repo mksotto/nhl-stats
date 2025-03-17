@@ -1,38 +1,24 @@
-import { FC, useEffect, useState } from "react";
-import { playerSpotlightGet } from "../../api/api-web.nhle/playerSpotlightGet";
-import { PlayerSpotlightGet } from "../../types/playerSpotlightGet";
+import { FC, useState } from "react";
 import {Card, Checkbox, Flex, Input} from "antd";
 import { SpotlightPlayers } from "./SpotlightPlayer/SpotlightPlayers";
 import { useNavigate } from "react-router-dom";
 import styles from './SearchPlayerPage.module.css'
-import { useSearchPlayer } from "../../queries/useSearchPlayer";
 import { useDebounce } from "@uidotdev/usehooks";
 import { SearchResult } from "./SearchResult/SearchResult";
+import {usePlayersSearchName} from "../../queries/players/usePlayersSearchName.ts";
+import {usePlayersSpotlight} from "../../queries/players/usePlayersSpotlight.ts";
 
 export const SearchPlayerPage: FC = () => {
     const navigate = useNavigate();
-    const [spotlightPlayer, setSpotlightPlayer] = useState<PlayerSpotlightGet[]>();
-    const [active, setActive] = useState<boolean>(true)
-    useEffect(() => {
-        try {
-            playerSpotlightGet()
-                .then(r => setSpotlightPlayer( [...r].sort((a, b) => {
-                    if (a.sortId < b.sortId) {
-                        return -1;
-                    }
-                    if (a.sortId > b.sortId) {
-                        return 1;
-                    }
-                    return 0;
-                })))
-        } catch (e) {
-            console.error(e)
-        }
-    }, [])
+    const [active, setActive] = useState<boolean>(true);
     const [searchPlayer, setSearchPlayer] = useState<string>('');
     const debounceSearch = useDebounce(searchPlayer, 500);
 
-    const {data: players} = useSearchPlayer(debounceSearch, active);
+    const {data: spotlightPlayer} = usePlayersSpotlight();
+    const {data: players} = usePlayersSearchName(debounceSearch, active);
+
+
+    // const {data: pl} = useSearchPlayer(debounceSearch, active);
 
     return (
         <Flex justify="center">
@@ -48,16 +34,16 @@ export const SearchPlayerPage: FC = () => {
                     {(players 
                         ? players?.map((player) => (
                             <SearchResult 
-                                key={player.playerId}
+                                key={player.id}
                                 player={player}
-                                onClick={() => {navigate(`/player/${player.playerId}`)}}
+                                onClick={() => {navigate(`/players/${player.id}`)}}
                             />
                         )) 
                         : spotlightPlayer?.map((player) => (
                             <SpotlightPlayers 
-                                key={player.playerId}
+                                key={player.id}
                                 player={player}
-                                onClick={() => {navigate(`/player/${player.playerId}`)}}
+                                onClick={() => {navigate(`/players/${player.id}`)}}
                             />
                         ))
                     )}                    

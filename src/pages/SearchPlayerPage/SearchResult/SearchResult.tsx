@@ -1,29 +1,38 @@
 import { FC } from "react";
 import { Flex } from "antd";
-import { SearchPlayerGet } from "../../../types/searchPlayerGet";
+import {SearchPlayer} from "../../../types/domain/nhl-stats.ts";
 import styles from './SearchResult.module.css';
 
 type Props = {
-    player: SearchPlayerGet;
-    onClick: React.MouseEventHandler<HTMLElement>
-}
+    player: SearchPlayer;
+    onClick: () => void;
+};
 
-export const SearchResult: FC<Props> = ({player, onClick}) => {
-   
-    return (
-        <Flex className={styles.playerCard} onClick={onClick}>
-            <img src={`https://assets.nhle.com/mugs/nhl/latest/${player.playerId}.png`} className={styles.headshot} /> 
-            <Flex vertical justify="center" gap={14}>
-                <div className={styles.name}>{player.name}</div>
-                <Flex gap={4}>
-                    <img src={(player.teamAbbrev ? `https://assets.nhle.com/logos/nhl/svg/${player.teamAbbrev}_light.svg` : `https://assets.nhle.com/logos/nhl/svg/${player.lastTeamAbbrev}_light.svg`)} className={styles.teamLogo} />
-                    <div className={styles.description}>{(player.teamAbbrev ? player.teamAbbrev : player.lastTeamAbbrev)}</div>
-                    <div className={styles.description}>•</div>
-                    <div className={styles.description}>{`#${player.sweaterNumber}`}</div>
-                    <div className={styles.description}>•</div>
-                    <div className={styles.description}>{player.positionCode}</div>
-                </Flex>
+export const SearchResult: FC<Props> = ({player, onClick}) => (
+    <Flex className={styles.playerCard} onClick={onClick}>
+        <img src={player.headshot} alt="headshot" className={styles.headshot}/>
+        <Flex vertical justify="center" gap={14}>
+            <div className={styles.name}>{player.name}</div>
+            <Flex gap={4} className={styles.description}>
+                {(player.currentTeam || player.lastTeam) && (
+                    <>
+                        <img
+                            src={player.currentTeam?.logo || player.lastTeam?.logo || undefined}
+                            alt='team logo'
+                            className={styles.teamLogo}
+                        />
+                        <div>{player.currentTeam?.abbrev || player.lastTeam?.abbrev || undefined}</div>
+                        <div>•</div>
+                        {player.sweaterNumber && (
+                            <>
+                                <div>#{player.sweaterNumber}</div>
+                                <div>•</div>
+                            </>
+                        )}
+                        <div>{player.position}</div>
+                    </>
+                )}
             </Flex>
         </Flex>
-    )
-} 
+    </Flex>
+)

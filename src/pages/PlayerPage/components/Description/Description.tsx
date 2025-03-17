@@ -1,8 +1,8 @@
 import { FC } from "react";
-import styles from './Description.module.css'
 import { Flex, Typography } from "antd";
 import Markdown from "marked-react";
 import {PlayerDescription} from "../../../../types/domain/nhl-stats.ts";
+import styles from './Description.module.css'
 
 type Props = {
     description: PlayerDescription | null;
@@ -18,5 +18,5 @@ export const Description: FC<Props> = ({description}) => {
                 <Typography.Paragraph className={styles.paragraph}><Markdown>{description.biography}</Markdown></Typography.Paragraph>
             </div>
         </Flex>
-    )
-}
+    );
+};
