@@ -1,7 +1,7 @@
 import {useQuery} from "react-query";
-import {playersIdGet} from "../../api/nhl-stats/players/playersIdGet.ts";
+import {playersIdGamesLogGet} from "../../api/nhl-stats/players/playersIdGamesLogGet.ts";
 
-export const usePlayersIdGamesLog = (id: number) => useQuery({
+export const usePlayersIdGamesLog = (id: number, season?: number, gameType?: 2 | 3) => useQuery({
     queryKey: ['playersIdGamesLog', id],
-    queryFn: () => playersIdGet(id),
+    queryFn: () => playersIdGamesLogGet(id, season, gameType),
 });

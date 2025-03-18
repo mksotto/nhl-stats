@@ -1,7 +1,8 @@
 import { Flex, Select, Table, TableProps, Typography } from "antd";
 import { FC, useState } from "react";
-import {SKATER_PARAMS, GOALIE_PARAMS, GAME_TYPE_ID_OPTIONS, LEAGUE_OPTIONS} from "./constants";
-import styles from './StatsCareer.module.css'
+import {SKATER_PARAMS, GOALIE_PARAMS, LEAGUE_OPTIONS} from "./constants";
+import {GAME_TYPE_ID_OPTIONS} from "../../../../../constants/constants.ts";
+import styles from './StatsCareer.module.css';
 import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
 import {PlayerAdvanced, PlayerSeasonTotal} from "../../../../../types/domain/nhl-stats.ts";
 
@@ -15,18 +16,12 @@ const filteredStats = (seasonTotals: PlayerSeasonTotal[], statsLeague: string, g
 );
 
 export const StatsCareer: FC<Props> = ({player}) => {
-
-    if(!player.seasonTotal) return null;
-
+    if(!player.seasonTotal) return;
     const [league, setLeague] = useState(LEAGUE_OPTIONS[0].value);
     const [gameTypeId, setGameTypeId] = useState(GAME_TYPE_ID_OPTIONS[0].value);
-
     const isMobile = useIsMobile();
-
-    const data = filteredStats(player.seasonTotal, league, gameTypeId)
-
-    const columns: TableProps<PlayerSeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS )
-
+    const dataSource = filteredStats(player.seasonTotal, league, gameTypeId);
+    const columns: TableProps<PlayerSeasonTotal>['columns'] = ( player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS );
     return (
         <Flex vertical gap={16}>
             <Flex className={styles.container}>
@@ -50,7 +45,7 @@ export const StatsCareer: FC<Props> = ({player}) => {
                     />
                 </Flex>
             </Flex>
-            <Table className={styles.table} columns={columns} dataSource={data} pagination={false} />
+            <Table className={styles.table} columns={columns} dataSource={dataSource} pagination={false} />
         </Flex>
-    )
-}
+    );
+};

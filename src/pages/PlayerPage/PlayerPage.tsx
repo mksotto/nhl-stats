@@ -1,4 +1,4 @@
-import {Card, Flex, Spin} from "antd";
+import {Card, Flex} from "antd";
 import { FC } from "react";
 import styles from './PlayerPage.module.css'
 import { useParams } from "react-router-dom";
@@ -9,17 +9,19 @@ import { Last5Games } from "./components/Last5Games/Last5Games";
 import { Stats } from "./components/Stats/Stats";
 import { Description } from "./components/Description/Description";
 import {useIsExtraLarge, useIsLarge, useIsMobile} from "../../hooks/mediaCheckers.ts";
-import {LoadingOutlined} from "@ant-design/icons";
 import {usePlayersId} from "../../queries/players/usePlayersId.ts";
-
 
 export const PlayerPage: FC = () => {
     const {id} = useParams();
     const {data: player, isLoading: isPlayerLoading} = usePlayersId(Number(id));
 
     const isMobile = useIsMobile();
-    const isLarge =  useIsLarge();
+    const isLarge = useIsLarge();
     const isExtraLarge = useIsExtraLarge();
+
+    const title = <CardTitle player={player}/>;
+    const featuredStats = player && <FeaturedStats player={player}/>;
+    const headshot = <img src={player?.headshot} alt='Player headshot' className={styles.headShot}/>;
 
     return (
         <Flex justify="center">
@@ -28,19 +30,18 @@ export const PlayerPage: FC = () => {
                     <Flex style={{backgroundImage: `url(${player?.heroImage})`}} className={styles.heroImage}>
                         {!isMobile ? <Flex className={styles.playerDescription}>
                             <Flex className={styles.playerInfo}>
-                                <img src={player?.headshot} alt='Player headshot' className={styles.headShot}/>
+                                {headshot}
                                 <Flex gap={16} vertical style={{width: '100%'}}>
-                                    {!isLarge && <CardTitle player={player}/>}
+                                    {!isLarge && title}
                                     <PlayerCharacteristics info={player?.info} isActive={player?.isActive}/>
                                 </Flex>
                             </Flex>
-                            {isExtraLarge && player ? <FeaturedStats player={player}/> :
-                                <Spin indicator={<LoadingOutlined spin/>} size="large"/>}
+                            {isExtraLarge && featuredStats}
                         </Flex> : ' '}
                     </Flex>
-                    {isMobile && <img src={player?.headshot} alt='Player headshot' className={styles.headShot}/>}
-                    {isMobile && <CardTitle player={player}/>}
-                    {!isExtraLarge && player && <FeaturedStats player={player}/>}
+                    {isMobile && headshot}
+                    {isMobile && title}
+                    {!isExtraLarge && featuredStats}
                     {player && <Last5Games player={player}/>}
                     {player && <Stats player={player} id={Number(id)}/>}
                     {player && <Description description={player?.description}/>}

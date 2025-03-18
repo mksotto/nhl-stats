@@ -368,7 +368,7 @@ export interface PlayerGameLog {
   /** @example 34 */
   shotsAgainst: number | null;
   /** @example 2 */
-  goalsAgainst?: number | null;
+  goalsAgainst: number | null;
   /** @example ".925" */
   savePctg: string | null;
 }

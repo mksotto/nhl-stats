@@ -1,8 +1,8 @@
-import { TableProps } from "antd"
-import { GameLog } from "../../../../../types/playerPlayerIdGameLogGet"
-import dayjs from "dayjs"
+import { TableProps } from "antd";
+import dayjs from "dayjs";
+import {PlayerGameLog} from "../../../../../types/domain/nhl-stats.ts";
 
-export const SKATER_PARAMS: TableProps<GameLog>['columns'] = [
+export const SKATER_PARAMS: TableProps<PlayerGameLog>['columns'] = [
     {
         title: 'Date',
         dataIndex: 'gameDate',
@@ -32,13 +32,6 @@ export const SKATER_PARAMS: TableProps<GameLog>['columns'] = [
      {
         title: '+/-',
         dataIndex: 'plusMinus',
-        render: (plusMinus: number) => {
-         if (plusMinus > 0) {
-            return `+${plusMinus}`
-         } else {
-            return plusMinus
-         }
-        }
      },
      {
         title: 'PIM',
@@ -82,7 +75,7 @@ export const SKATER_PARAMS: TableProps<GameLog>['columns'] = [
      },
 ]
 
-export const GOALIE_PARAMS = [
+export const GOALIE_PARAMS: TableProps<PlayerGameLog>['columns'] = [
     {
         title: 'Date',
         dataIndex: 'gameDate',
@@ -104,7 +97,6 @@ export const GOALIE_PARAMS = [
     {
        title: 'DEC',
        dataIndex: 'decision',
-       render: (decision: string) => (decision ? decision : '-')
     },
     {
        title: 'SA',
@@ -117,7 +109,6 @@ export const GOALIE_PARAMS = [
     {
        title: 'SV%',
        dataIndex: 'savePctg',
-       render: (num: number) => (num ? num.toFixed(3).replace(/^0\./, '.') : '-'),
     },
     {
         title: 'G',

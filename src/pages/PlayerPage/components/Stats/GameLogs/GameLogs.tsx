@@ -1,11 +1,11 @@
 import { Flex, Select, Table, TableProps, Typography } from "antd";
 import { FC, useEffect, useState } from "react";
 import styles from './GameLogs.module.css'
-import { usePlayerPlayerIdGameLogNow } from "../../../../../queries/usePlayerPlayerIdGameLogNow";
-import { usePlayerPlayerIdGameLogSeasonGameType } from "../../../../../queries/usePlayerPlayerIdGameLogSeasonGameType";
-import { GameLog } from "../../../../../types/playerPlayerIdGameLogGet";
 import { GOALIE_PARAMS, SKATER_PARAMS } from "./constants";
 import {useIsMobile} from "../../../../../hooks/mediaCheckers.ts";
+import {usePlayersIdGamesLog} from "../../../../../queries/players/usePlayersIdGamesLog.ts";
+import {PlayerGameLog} from "../../../../../types/domain/nhl-stats.ts";
+import {GAME_TYPE_ID_OPTIONS} from "../../../../../constants/constants.ts";
 
 type Props = {
     id: number,
@@ -13,32 +13,47 @@ type Props = {
 }
 
 export const GameLogs: FC<Props> = ({id, position}) => {
-
     const [season, setSeason] = useState<number>();
-    const [gameTypeId, setGameTypeId] = useState<number>(2);
-    const [tableData, setTableData] = useState<GameLog[]>()
-    
-    const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(id)
-    const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(id, season, gameTypeId)
-
-    const isMobile = useIsMobile()
-
+    const [gameTypeId, setGameTypeId] = useState< 2 | 3 >();
+    const [tableData, setTableData] = useState<PlayerGameLog[] | null>();
+    const {data: gamesLog, refetch} = usePlayersIdGamesLog(id, season, gameTypeId);
     useEffect(() => {
-        setSeason(gameLogNow?.seasonId)
-        setTableData(gameLogNow?.gameLog)
-    }, [gameLogNow])
-
+        setSeason(gamesLog?.seasonId);
+        setGameTypeId(gamesLog?.gameTypeId);
+        setTableData(gamesLog?.gamesLog)
+    }, [gamesLog]);
     useEffect(() => {
-        setGameTypeId((gameLogNow?.playerStatsSeasons.find((s) => s.season === season)?.gameTypes.includes(gameTypeId) ? gameTypeId : 2))
+        void refetch();
+    }, [season, gameTypeId]);
+    const isMobile = useIsMobile();
+    const seasonSelectorOptions = gamesLog?.playerStatsSeason
+        .map((s) => ({
+            label: `${String(s.season).substring(0, 4)}-${String(s.season).substring(6)}`,
+            value: s.season,
+        }));
+    const gameTypeSelectorOptions = GAME_TYPE_ID_OPTIONS
+        .filter(({value}) => gamesLog?.playerStatsSeason
+            .find((s) => s.season === season)?.gameTypes.includes(value as 2 | 3));
+    const columns: TableProps<PlayerGameLog>['columns'] = (position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS);
+
+    // todo
+
+    // const {data: gameLogNow} = usePlayerPlayerIdGameLogNow(id)
+    // const {data: gameLog} = usePlayerPlayerIdGameLogSeasonGameType(id, season, gameTypeId)
+
+
+    // useEffect(() => {
+    //     setSeason(gameLogNow?.seasonId)
+    //     setTableData(gameLogNow?.gameLog)
+    // }, [gameLogNow])
+    //
+    useEffect(() => {
+        setGameTypeId((gamesLog?.playerStatsSeason.find((s) => s.season === season)?.gameTypes.includes(gameTypeId!) ? gameTypeId : 2))
     }, [season])
-
-    useEffect(() => {
-        setTableData(gameLog?.gameLog)
-    }, [gameLog])
-
-    const data = tableData;
-
-    const columns: TableProps<GameLog>['columns'] = (position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS);
+    //
+    // useEffect(() => {
+    //     setTableData(gameLog?.gameLog)
+    // }, [gameLog])
 
     return (
         <Flex vertical gap={16}>
@@ -48,25 +63,22 @@ export const GameLogs: FC<Props> = ({id, position}) => {
                 </Typography.Text>}
                 <Flex className={styles.selectContainer}>
                     <Select
-                        options={gameLogNow?.playerStatsSeasons?.map((season) => ({
-                            label: `${String(season.season).substring(0, 4)}-${String(season.season).substring(6)}`,
-                            value: season.season,
-                        }))}
+                        options={seasonSelectorOptions}
                         value={season}
-                        onChange={(v) => setSeason(v)}
+                        onChange={setSeason}
                         size='large'
                         className={styles.select}
                     />
                     <Select 
-                        options={[{label: 'Regular Season', value: 2}, {label: 'Playoffs', value: 3}].filter(({value}) => gameLogNow?.playerStatsSeasons.find((s) => s.season === season)?.gameTypes.includes(value))}
+                        options={gameTypeSelectorOptions}
                         value={gameTypeId}
-                        onChange={(v) => setGameTypeId(v)}
+                        onChange={setGameTypeId}
                         size='large'
                         className={styles.select}
                     />
                 </Flex>
             </Flex>
-            <Table className={styles.table} columns={columns} dataSource={data} pagination={false} />
+            {tableData !== null && <Table className={styles.table} columns={columns} dataSource={tableData} pagination={false}/>}
         </Flex>
     )
 }
