@@ -1,15 +1,15 @@
 import {TableProps} from "antd";
-import {Player} from "../../../../types/rosterTeamSeason.ts";
 import dayjs from "dayjs";
+import {PlayerRoster} from "../../../../types/domain/nhl-stats.ts";
 
-export const PLAYER_PARAMS: Exclude<TableProps<Player>['columns'], undefined>  = [
+export const PLAYER_PARAMS: Exclude<TableProps<PlayerRoster>['columns'], undefined>  = [
     {
         title: '#',
         dataIndex: 'sweaterNumber',
     },
     {
         title: 'Position',
-        dataIndex: 'positionCode',
+        dataIndex: 'position',
     },
     {
         title: 'Catches',
@@ -17,22 +17,22 @@ export const PLAYER_PARAMS: Exclude<TableProps<Player>['columns'], undefined>  =
     },
     {
         title: 'Height (cm)',
-        dataIndex: 'heightInCentimeters',
+        dataIndex: 'height',
     },
     {
         title: 'Weight (kg)',
-        dataIndex: 'weightInKilograms',
+        dataIndex: 'weight',
     },
     {
         title: 'Born',
         dataIndex: 'birthDate',
-        render: (birthDate) => (dayjs(birthDate).format('DD MMM YYYY'))
+        render: (_, player) => (dayjs(player.birth.date).format('DD MMM YYYY'))
     },
     {
         title: 'Birthplace',
         key: 'birthplace',
-        render: (_, player) => `${player.birthCity.default}, `
-            + (player.birthStateProvince?.default ? `${player.birthStateProvince.default}, ` : '')
-            + `${player.birthCountry}`,
+        render: (_, player) => `${player.birth.city}, `
+            + (player.birth.province ? `${player.birth.province}, ` : '')
+            + player.birth.country,
     }
 ]

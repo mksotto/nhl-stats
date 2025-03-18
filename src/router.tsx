@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
             path('/', MainPage),
             path('/players', SearchPlayerPage),
             path('/players/:id', PlayerPage),
-            path('/teams/:teamAbbrev', TeamRosterPage)
+            path('/teams/:abbrev', TeamRosterPage)
         ]
     }
 ]);
