@@ -13,13 +13,8 @@ export const SearchPlayerPage: FC = () => {
     const [active, setActive] = useState<boolean>(true);
     const [searchPlayer, setSearchPlayer] = useState<string>('');
     const debounceSearch = useDebounce(searchPlayer, 500);
-
     const {data: spotlightPlayer} = usePlayersSpotlight();
     const {data: players} = usePlayersSearchName(debounceSearch, active);
-
-
-    // const {data: pl} = useSearchPlayer(debounceSearch, active);
-
     return (
         <Flex justify="center">
             <Card className={styles.layout}>

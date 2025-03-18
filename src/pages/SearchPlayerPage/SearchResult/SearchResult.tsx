@@ -21,7 +21,7 @@ export const SearchResult: FC<Props> = ({player, onClick}) => (
                             alt='team logo'
                             className={styles.teamLogo}
                         />
-                        <div>{player.currentTeam?.abbrev || player.lastTeam?.abbrev || undefined}</div>
+                        <div>{player.currentTeam?.abbrev || player.lastTeam?.abbrev}</div>
                         <div>•</div>
                         {player.sweaterNumber && (
                             <>

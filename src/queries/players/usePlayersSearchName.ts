@@ -4,4 +4,5 @@ import {playersSearchNameGet} from "../../api/nhl-stats/players/playersSearchNam
 export const usePlayersSearchName = (name: string, active?: boolean) => useQuery({
     queryKey: ['playersSearchName', name, active],
     queryFn: () => playersSearchNameGet(name, active),
+    enabled: Boolean(name),
 });
