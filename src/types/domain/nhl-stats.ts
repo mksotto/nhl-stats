@@ -42,11 +42,11 @@ export type PlayerAdvanced = Player & {
   emblems: PlayerEmblem[] | null;
   heroImage: string;
   lastSeasonStats:
-      | ({
-    /** @example "2024-25" */
-    season: string;
-  } & PlayerFeaturedStats)
-      | null;
+    | ({
+        /** @example "2024-25" */
+        season: string;
+      } & PlayerFeaturedStats)
+    | null;
   careerStats: PlayerFeaturedStats;
   last5Games: PlayerLast5Games[] | null;
   seasonTotal: PlayerSeasonTotal[] | null;
@@ -68,7 +68,7 @@ export interface PlayerInfo {
   shootsCatches: ShootsCatches;
   birth: {
     /** @format date */
-    date: Date;
+    date: string;
     /** @example "Halifax" */
     city: string;
     /** @example "Nova Scotia" */
@@ -125,7 +125,7 @@ export interface PlayerEmblem {
 
 export interface PlayerLast5Games {
   /** @format date */
-  gameDate: Date;
+  gameDate: string;
   /** @example "TOR" */
   opponentAbbrev: string;
   /** @example 2 */
@@ -299,7 +299,7 @@ export interface PlayerRoster {
   shootsCatches: ShootsCatches;
   birth: {
     /** @format date */
-    date: Date;
+    date: string;
     /** @example "Halifax" */
     city: string;
     /** @example "Nova Scotia" */
@@ -329,7 +329,7 @@ export interface PlayerGamesLog {
 
 export interface PlayerGameLog {
   /** @format date */
-  gameDate: Date;
+  gameDate: string;
   /** @example "COL" */
   teamAbbrev: string;
   /** @example "EDM" */
