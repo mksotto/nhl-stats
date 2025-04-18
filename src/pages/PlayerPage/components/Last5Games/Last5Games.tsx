@@ -2,14 +2,14 @@ import { Flex, Table, TableProps } from "antd";
 import { FC } from "react";
 import styles from './Last5Games.module.css';
 import { SKATER_PARAMS, GOALIE_PARAMS} from './constants.ts';
-import {PlayerAdvanced, PlayerLast5Games} from "../../../../types/domain/nhl-stats.ts";
+import {PlayerLast5Games} from "../../../../types/domain/nhl-stats.ts";
+import {useParams} from "react-router-dom";
+import {usePlayersId} from "../../../../queries/players/usePlayersId.ts";
 
-type Props = {
-    player: PlayerAdvanced;
-};
-
-export const Last5Games: FC<Props> = ({player}) => {
-    if(!player.last5Games?.length) return;
+export const Last5Games: FC = () => {
+    const {id} = useParams();
+    const {data: player} = usePlayersId(Number(id));
+    if(!player?.last5Games?.length) return;
     const data: PlayerLast5Games[] = player.last5Games;
     const columns: TableProps<PlayerLast5Games>['columns'] = (player.position !== 'G' ? SKATER_PARAMS : GOALIE_PARAMS)
     return (

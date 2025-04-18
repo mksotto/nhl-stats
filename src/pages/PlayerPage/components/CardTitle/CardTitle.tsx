@@ -1,22 +1,20 @@
 import { FC } from "react";
 import { Flex, Select } from "antd";
 import styles from './CardTitle.module.css'
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useIsLarge} from "../../../../hooks/mediaCheckers.ts";
-import {PlayerAdvanced} from "../../../../types/domain/nhl-stats.ts";
+import {usePlayersId} from "../../../../queries/players/usePlayersId.ts";
 
-type Props = {
-    player: PlayerAdvanced | undefined,
-}
-
-export const CardTitle: FC<Props> = ({player}) => {
+export const CardTitle: FC = () => {
     const navigate = useNavigate();
+    const {id} = useParams();
+    const {data: player} = usePlayersId(Number(id));
     const options = player?.currentTeamRoster?.map((otherPlayer) => ({
         label: otherPlayer.name,
         value: otherPlayer.id,
     }));
 
-    const isLarge = useIsLarge()
+    const isLarge = useIsLarge();
 
     return (
         <Flex justify="space-between">

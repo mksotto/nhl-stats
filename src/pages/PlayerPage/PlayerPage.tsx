@@ -19,32 +19,30 @@ export const PlayerPage: FC = () => {
     const isLarge = useIsLarge();
     const isExtraLarge = useIsExtraLarge();
 
-    const title = <CardTitle player={player}/>;
-    const featuredStats = player && <FeaturedStats player={player}/>;
     const headshot = <img src={player?.headshot} alt='Player headshot' className={styles.headShot}/>;
 
     return (
         <Flex justify="center">
-            <Card className={styles.layout} title={(isLarge && <CardTitle player={player}/>)} loading={isPlayerLoading}>
+            <Card className={styles.layout} title={(isLarge && <CardTitle/>)} loading={isPlayerLoading}>
                 <Flex vertical gap={24} align='center'>
                     <Flex style={{backgroundImage: `url(${player?.heroImage})`}} className={styles.heroImage}>
                         {!isMobile ? <Flex className={styles.playerDescription}>
                             <Flex className={styles.playerInfo}>
                                 {headshot}
                                 <Flex gap={16} vertical style={{width: '100%'}}>
-                                    {!isLarge && title}
-                                    <PlayerCharacteristics info={player?.info} isActive={player?.isActive}/>
+                                    {!isLarge && <CardTitle/>}
+                                    <PlayerCharacteristics/>
                                 </Flex>
                             </Flex>
-                            {isExtraLarge && featuredStats}
+                            {isExtraLarge && <FeaturedStats/>}
                         </Flex> : ' '}
                     </Flex>
                     {isMobile && headshot}
-                    {isMobile && title}
-                    {!isExtraLarge && featuredStats}
-                    {player && <Last5Games player={player}/>}
-                    {player && <Stats player={player} id={Number(id)}/>}
-                    {player && <Description description={player?.description}/>}
+                    {isMobile && <CardTitle/>}
+                    {!isExtraLarge && <FeaturedStats/>}
+                    <Last5Games/>
+                    <Stats/>
+                    <Description/>
                 </Flex>
             </Card>
         </Flex>

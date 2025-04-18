@@ -3,14 +3,13 @@ import { FC } from "react";
 import styles from './Stats.module.css';
 import { StatsCareer } from "./StatsCareer/StatsCareer";
 import { GameLogs } from "./GameLogs/GameLogs";
-import {PlayerAdvanced} from "../../../../types/domain/nhl-stats.ts";
+import {useParams} from "react-router-dom";
+import {usePlayersId} from "../../../../queries/players/usePlayersId.ts";
 
-type Props = {
-    player: PlayerAdvanced,
-    id: number,
-}
-
-export const Stats: FC<Props> = ({player, id}) => {
+export const Stats: FC = () => {
+    const {id} = useParams();
+    const {data: player} = usePlayersId(Number(id));
+    if (!player) return;
     const options = [
         {
             label: 'Career',
@@ -20,7 +19,7 @@ export const Stats: FC<Props> = ({player, id}) => {
         {
             label: 'Game Logs',
             key: 'gameLogs',
-            children: <GameLogs id={id} position={player.position} />,
+            children: <GameLogs id={Number(id)} position={player.position} />,
         }
     ]
 

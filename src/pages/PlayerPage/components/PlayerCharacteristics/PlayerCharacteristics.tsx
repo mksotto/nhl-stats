@@ -2,14 +2,14 @@ import { FC } from "react";
 import {Flex} from "antd";
 import dayjs from "dayjs";
 import styles from './PlayerCharacteristics.module.css';
-import {PlayerInfo} from "../../../../types/domain/nhl-stats.ts";
+import {useParams} from "react-router-dom";
+import {usePlayersId} from "../../../../queries/players/usePlayersId.ts";
 
-type Props = {
-    info: PlayerInfo | undefined,
-    isActive: boolean | undefined,
-}
-
-export const PlayerCharacteristics: FC<Props> = ({info, isActive}) => {
+export const PlayerCharacteristics: FC = () => {
+    const {id} = useParams();
+    const {data: player} = usePlayersId(Number(id));
+    if (!player?.info) return;
+    const {info, isActive} = player;
     const playerInfo = {
         Height: `${info?.height} cm`,
         Weight: `${info?.weight} kg`,
